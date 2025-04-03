@@ -1,0 +1,816 @@
+{
+    "pagination": {
+        "page": 1,
+        "pages": 1,
+        "per_page": 50,
+        "items": 14,
+        "urls": {}
+    },
+    "releases": [
+        {
+            "id": 12446763,
+            "instance_id": 1872060120,
+            "date_added": "2024-12-22T17:00:15-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 12446763,
+                "master_id": 1414272,
+                "master_url": "https://api.discogs.com/masters/1414272",
+                "resource_url": "https://api.discogs.com/releases/12446763",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Love Me / Love Me Not",
+                "year": 2018,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "2",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Honne",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 4422805,
+                        "resource_url": "https://api.discogs.com/artists/4422805"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Atlantic Records UK",
+                        "catno": "0190295637118",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 534568,
+                        "resource_url": "https://api.discogs.com/labels/534568"
+                    }
+                ],
+                "genres": [
+                    "Blues",
+                    "Pop"
+                ],
+                "styles": [
+                    "Modern Electric Blues",
+                    "Indie Pop"
+                ]
+            }
+        },
+        {
+            "id": 24552893,
+            "instance_id": 1968136943,
+            "date_added": "2025-03-18T12:58:24-07:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 24552893,
+                "master_id": 2793302,
+                "master_url": "https://api.discogs.com/masters/2793302",
+                "resource_url": "https://api.discogs.com/releases/24552893",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Everything I Know About Love",
+                "year": 2022,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Laufey (2)",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 10016131,
+                        "resource_url": "https://api.discogs.com/artists/10016131"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "AWAL Recordings",
+                        "catno": "LAULP001",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 234076,
+                        "resource_url": "https://api.discogs.com/labels/234076"
+                    }
+                ],
+                "genres": [
+                    "Jazz",
+                    "Pop"
+                ],
+                "styles": [
+                    "Contemporary Jazz",
+                    "Vocal"
+                ]
+            }
+        },
+        {
+            "id": 30524050,
+            "instance_id": 1968135350,
+            "date_added": "2025-03-18T12:56:58-07:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 30524050,
+                "master_id": 0,
+                "master_url": null,
+                "resource_url": "https://api.discogs.com/releases/30524050",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Bewitched: The Goddess Edition",
+                "year": 2024,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "text": "Transparent Green",
+                        "descriptions": [
+                            "LP",
+                            "45 RPM",
+                            "Album",
+                            "Deluxe Edition"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Laufey (2)",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 10016131,
+                        "resource_url": "https://api.discogs.com/artists/10016131"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "AWAL Recordings Ltd",
+                        "catno": "LAULP003XUO",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 1480076,
+                        "resource_url": "https://api.discogs.com/labels/1480076"
+                    }
+                ],
+                "genres": [
+                    "Jazz",
+                    "Pop"
+                ],
+                "styles": []
+            }
+        },
+        {
+            "id": 7979573,
+            "instance_id": 1872974451,
+            "date_added": "2024-12-23T15:58:54-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 7979573,
+                "master_id": 230676,
+                "master_url": "https://api.discogs.com/masters/230676",
+                "resource_url": "https://api.discogs.com/releases/7979573",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Reel Music",
+                "year": 1982,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "text": "Jacksonville",
+                        "descriptions": [
+                            "LP",
+                            "Compilation",
+                            "Stereo"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "The Beatles",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 82730,
+                        "resource_url": "https://api.discogs.com/artists/82730"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Capitol Records",
+                        "catno": "SV-12199",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 654,
+                        "resource_url": "https://api.discogs.com/labels/654"
+                    }
+                ],
+                "genres": [
+                    "Rock",
+                    "Stage & Screen"
+                ],
+                "styles": [
+                    "Soundtrack",
+                    "Beat",
+                    "Theme",
+                    "Pop Rock",
+                    "Psychedelic Rock"
+                ]
+            }
+        },
+        {
+            "id": 21911581,
+            "instance_id": 1872974607,
+            "date_added": "2024-12-23T15:59:07-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 21911581,
+                "master_id": 691657,
+                "master_url": "https://api.discogs.com/masters/691657",
+                "resource_url": "https://api.discogs.com/releases/21911581",
+                "thumb": "",
+                "cover_image": "",
+                "title": "In The Lonely Hour",
+                "year": 2021,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album",
+                            "Reissue"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Sam Smith (12)",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 1376377,
+                        "resource_url": "https://api.discogs.com/artists/1376377"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Capitol Records",
+                        "catno": "3880792",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 654,
+                        "resource_url": "https://api.discogs.com/labels/654"
+                    },
+                    {
+                        "name": "Method Records (4)",
+                        "catno": "00602438807925",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 597267,
+                        "resource_url": "https://api.discogs.com/labels/597267"
+                    }
+                ],
+                "genres": [
+                    "Pop"
+                ],
+                "styles": [
+                    "Ballad",
+                    "Europop",
+                    "Synth-pop"
+                ]
+            }
+        },
+        {
+            "id": 2644113,
+            "instance_id": 1872974259,
+            "date_added": "2024-12-23T15:58:32-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 2644113,
+                "master_id": 372561,
+                "master_url": "https://api.discogs.com/masters/372561",
+                "resource_url": "https://api.discogs.com/releases/2644113",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Rendez-Vous",
+                "year": 1983,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album",
+                            "Stereo"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Jorge Dalto",
+                        "anv": "",
+                        "join": "&",
+                        "role": "",
+                        "tracks": "",
+                        "id": 268216,
+                        "resource_url": "https://api.discogs.com/artists/268216"
+                    },
+                    {
+                        "name": "Superfriends (2)",
+                        "anv": "Super Friends",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 1789472,
+                        "resource_url": "https://api.discogs.com/artists/1789472"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Eastworld",
+                        "catno": "EWJ-90020",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 83466,
+                        "resource_url": "https://api.discogs.com/labels/83466"
+                    }
+                ],
+                "genres": [
+                    "Jazz"
+                ],
+                "styles": [
+                    "Fusion",
+                    "Jazz-Funk"
+                ]
+            }
+        },
+        {
+            "id": 29361040,
+            "instance_id": 1872974940,
+            "date_added": "2024-12-23T15:59:42-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 29361040,
+                "master_id": 1184947,
+                "master_url": "https://api.discogs.com/masters/1184947",
+                "resource_url": "https://api.discogs.com/releases/29361040",
+                "thumb": "",
+                "cover_image": "",
+                "title": "After Laughter",
+                "year": 2023,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "text": "Black & White Marble",
+                        "descriptions": [
+                            "LP",
+                            "Album",
+                            "Reissue"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Paramore",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 609563,
+                        "resource_url": "https://api.discogs.com/artists/609563"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Fueled By Ramen",
+                        "catno": "561588-1",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 42701,
+                        "resource_url": "https://api.discogs.com/labels/42701"
+                    }
+                ],
+                "genres": [
+                    "Electronic",
+                    "Rock",
+                    "Pop"
+                ],
+                "styles": [
+                    "New Wave",
+                    "Pop Rock",
+                    "Synth-pop",
+                    "Power Pop"
+                ]
+            }
+        },
+        {
+            "id": 2949207,
+            "instance_id": 1872967068,
+            "date_added": "2024-12-23T15:47:23-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 2949207,
+                "master_id": 602218,
+                "master_url": "https://api.discogs.com/masters/602218",
+                "resource_url": "https://api.discogs.com/releases/2949207",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Ocean Breeze",
+                "year": 1982,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Masayoshi Takanaka",
+                        "anv": "Takanaka",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 128537,
+                        "resource_url": "https://api.discogs.com/artists/128537"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Kitty Records",
+                        "catno": "25MS 0007",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 19271,
+                        "resource_url": "https://api.discogs.com/labels/19271"
+                    }
+                ],
+                "genres": [
+                    "Jazz"
+                ],
+                "styles": [
+                    "Jazz-Funk",
+                    "Fusion"
+                ]
+            }
+        },
+        {
+            "id": 10606921,
+            "instance_id": 1872968235,
+            "date_added": "2024-12-23T15:48:56-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 10606921,
+                "master_id": 347640,
+                "master_url": "https://api.discogs.com/masters/347640",
+                "resource_url": "https://api.discogs.com/releases/10606921",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Chacksfield Plays The Beatles' Song Book",
+                "year": 1970,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "text": "Gatefold",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Frank Chacksfield & His Orchestra",
+                        "anv": "Frank Chacksfield And His Orchestra",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 271871,
+                        "resource_url": "https://api.discogs.com/artists/271871"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "London Records",
+                        "catno": "SLC 4532",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 1060,
+                        "resource_url": "https://api.discogs.com/labels/1060"
+                    }
+                ],
+                "genres": [
+                    "Jazz",
+                    "Rock"
+                ],
+                "styles": [
+                    "Big Band",
+                    "Pop Rock",
+                    "Easy Listening"
+                ]
+            }
+        },
+        {
+            "id": 9127797,
+            "instance_id": 1872970350,
+            "date_added": "2024-12-23T15:52:04-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 9127797,
+                "master_id": 0,
+                "master_url": null,
+                "resource_url": "https://api.discogs.com/releases/9127797",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Today",
+                "year": 1980,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Ai Kanzaki",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 5290806,
+                        "resource_url": "https://api.discogs.com/artists/5290806"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Philips",
+                        "catno": "S-7102",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 7704,
+                        "resource_url": "https://api.discogs.com/labels/7704"
+                    }
+                ],
+                "genres": [
+                    "Jazz",
+                    "Funk / Soul",
+                    "Pop"
+                ],
+                "styles": []
+            }
+        },
+        {
+            "id": 10123738,
+            "instance_id": 1872975246,
+            "date_added": "2024-12-23T16:00:16-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 10123738,
+                "master_id": 1154812,
+                "master_url": "https://api.discogs.com/masters/1154812",
+                "resource_url": "https://api.discogs.com/releases/10123738",
+                "thumb": "",
+                "cover_image": "",
+                "title": "American Teen",
+                "year": 2017,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "2",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Khalid (16)",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 5779975,
+                        "resource_url": "https://api.discogs.com/artists/5779975"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "RCA",
+                        "catno": "88985-41432-1",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 895,
+                        "resource_url": "https://api.discogs.com/labels/895"
+                    },
+                    {
+                        "name": "Right Hand Music Group",
+                        "catno": "88985-41432-1",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 1188045,
+                        "resource_url": "https://api.discogs.com/labels/1188045"
+                    }
+                ],
+                "genres": [
+                    "Funk / Soul"
+                ],
+                "styles": [
+                    "Contemporary R&B"
+                ]
+            }
+        },
+        {
+            "id": 8253187,
+            "instance_id": 1872972252,
+            "date_added": "2024-12-23T15:55:17-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 8253187,
+                "master_id": 985638,
+                "master_url": "https://api.discogs.com/masters/985638",
+                "resource_url": "https://api.discogs.com/releases/8253187",
+                "thumb": "",
+                "cover_image": "",
+                "title": "At The Roundtable",
+                "year": 1959,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album",
+                            "Stereo"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Turk Murphy's Jazz Band",
+                        "anv": "Turk Murphy And His Jazz Band",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 2807055,
+                        "resource_url": "https://api.discogs.com/artists/2807055"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Roulette",
+                        "catno": "SR-25076",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 54550,
+                        "resource_url": "https://api.discogs.com/labels/54550"
+                    }
+                ],
+                "genres": [
+                    "Jazz"
+                ],
+                "styles": [
+                    "Dixieland"
+                ]
+            }
+        },
+        {
+            "id": 22250275,
+            "instance_id": 1872964761,
+            "date_added": "2024-12-23T15:43:46-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 22250275,
+                "master_id": 2554871,
+                "master_url": "https://api.discogs.com/masters/2554871",
+                "resource_url": "https://api.discogs.com/releases/22250275",
+                "thumb": "",
+                "cover_image": "",
+                "title": "Good Morning It's Now Tomorrow",
+                "year": 2021,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Album"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Matt Maltese",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 4206498,
+                        "resource_url": "https://api.discogs.com/artists/4206498"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "Tonight Matthew",
+                        "catno": "067003127615",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 1751308,
+                        "resource_url": "https://api.discogs.com/labels/1751308"
+                    }
+                ],
+                "genres": [
+                    "Pop"
+                ],
+                "styles": [
+                    "Indie Pop"
+                ]
+            }
+        },
+        {
+            "id": 5161230,
+            "instance_id": 1872973353,
+            "date_added": "2024-12-23T15:57:07-08:00",
+            "rating": 0,
+            "basic_information": {
+                "id": 5161230,
+                "master_id": 287015,
+                "master_url": "https://api.discogs.com/masters/287015",
+                "resource_url": "https://api.discogs.com/releases/5161230",
+                "thumb": "",
+                "cover_image": "",
+                "title": "All Aglow Again",
+                "year": 0,
+                "formats": [
+                    {
+                        "name": "Vinyl",
+                        "qty": "1",
+                        "descriptions": [
+                            "LP",
+                            "Compilation",
+                            "Mono"
+                        ]
+                    }
+                ],
+                "artists": [
+                    {
+                        "name": "Peggy Lee",
+                        "anv": "",
+                        "join": "",
+                        "role": "",
+                        "tracks": "",
+                        "id": 79742,
+                        "resource_url": "https://api.discogs.com/artists/79742"
+                    }
+                ],
+                "labels": [
+                    {
+                        "name": "World Record Club",
+                        "catno": "T 606",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 35306,
+                        "resource_url": "https://api.discogs.com/labels/35306"
+                    },
+                    {
+                        "name": "World Sound (2)",
+                        "catno": "T 606",
+                        "entity_type": "1",
+                        "entity_type_name": "Label",
+                        "id": 245385,
+                        "resource_url": "https://api.discogs.com/labels/245385"
+                    }
+                ],
+                "genres": [
+                    "Jazz"
+                ],
+                "styles": []
+            }
+        }
+    ]
+}     

@@ -1,0 +1,1213 @@
+{
+    "id": 24552893,
+    "status": "Accepted",
+    "year": 2022,
+    "resource_url": "https://api.discogs.com/releases/24552893",
+    "uri": "https://www.discogs.com/release/24552893-Laufey-2-Everything-I-Know-About-Love",
+    "artists": [
+        {
+            "name": "Laufey (2)",
+            "anv": "",
+            "join": "",
+            "role": "",
+            "tracks": "",
+            "id": 10016131,
+            "resource_url": "https://api.discogs.com/artists/10016131",
+            "thumbnail_url": "https://i.discogs.com/jX1InBlD_r-u2vHRq56RUpdPxf-TMLudGrpUVm4EtJk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTEwMDE2/MTMxLTE2OTM0OTgz/MTQtMjc3NS5qcGVn.jpeg"
+        }
+    ],
+    "artists_sort": "Laufey (2)",
+    "labels": [
+        {
+            "name": "AWAL Recordings",
+            "catno": "LAULP001",
+            "entity_type": "1",
+            "entity_type_name": "Label",
+            "id": 234076,
+            "resource_url": "https://api.discogs.com/labels/234076",
+            "thumbnail_url": "https://i.discogs.com/vkv7YijoDCAT_FfSqqsLOdbfTIyiRhYUvLE6kkSeSfg/rs:fit/g:sm/q:90/h:78/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTIzNDA3/Ni0xNjM2MDY1MzA0/LTY2NDYuanBlZw.jpeg"
+        }
+    ],
+    "series": [],
+    "companies": [
+        {
+            "name": "Laufey",
+            "catno": "",
+            "entity_type": "13",
+            "entity_type_name": "Phonographic Copyright (p)",
+            "id": 3020968,
+            "resource_url": "https://api.discogs.com/labels/3020968"
+        },
+        {
+            "name": "Laufey",
+            "catno": "",
+            "entity_type": "14",
+            "entity_type_name": "Copyright (c)",
+            "id": 3020968,
+            "resource_url": "https://api.discogs.com/labels/3020968"
+        },
+        {
+            "name": "Awal Recordings America, Inc.",
+            "catno": "",
+            "entity_type": "5",
+            "entity_type_name": "Licensed To",
+            "id": 1533775,
+            "resource_url": "https://api.discogs.com/labels/1533775",
+            "thumbnail_url": "https://i.discogs.com/LH1QQZWy7FCIiu7DxkG4whpDrwPtU8wFAeuW4GWQDwU/rs:fit/g:sm/q:90/h:200/w:200/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE1MzM3/NzUtMTU3OTM4MzYz/MS0yODAxLmpwZWc.jpeg"
+        },
+        {
+            "name": "AWAL Recordings",
+            "catno": "",
+            "entity_type": "9",
+            "entity_type_name": "Distributed By",
+            "id": 234076,
+            "resource_url": "https://api.discogs.com/labels/234076",
+            "thumbnail_url": "https://i.discogs.com/vkv7YijoDCAT_FfSqqsLOdbfTIyiRhYUvLE6kkSeSfg/rs:fit/g:sm/q:90/h:78/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTIzNDA3/Ni0xNjM2MDY1MzA0/LTY2NDYuanBlZw.jpeg"
+        },
+        {
+            "name": "Vingolf Publishing",
+            "catno": "",
+            "entity_type": "21",
+            "entity_type_name": "Published By",
+            "id": 2925311,
+            "resource_url": "https://api.discogs.com/labels/2925311"
+        },
+        {
+            "name": "Sunking Studios",
+            "catno": "",
+            "entity_type": "27",
+            "entity_type_name": "Mixed At",
+            "id": 943142,
+            "resource_url": "https://api.discogs.com/labels/943142",
+            "thumbnail_url": "https://i.discogs.com/sD79zgzVsodm2wDKu8uMQCil2Ko20-O40ISodXEg4Ho/rs:fit/g:sm/q:90/h:170/w:170/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk0MzE0/Mi0xNjYxNjcyMzA2/LTY3OTMuanBlZw.jpeg"
+        },
+        {
+            "name": "Sterling Sound",
+            "catno": "",
+            "entity_type": "29",
+            "entity_type_name": "Mastered At",
+            "id": 264060,
+            "resource_url": "https://api.discogs.com/labels/264060",
+            "thumbnail_url": "https://i.discogs.com/Z8f0gMBrt5jLL4TAcCYDGXmMPOLi9V0UW593WXP6BUU/rs:fit/g:sm/q:90/h:118/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI2NDA2/MC0xNTAwMjgzMzYy/LTMyMTguanBlZw.jpeg"
+        },
+        {
+            "name": "GZ Media",
+            "catno": "245120E",
+            "entity_type": "17",
+            "entity_type_name": "Pressed By",
+            "id": 430654,
+            "resource_url": "https://api.discogs.com/labels/430654",
+            "thumbnail_url": "https://i.discogs.com/4pFHZQlh4vHy5rEvzsU2PiUTY_48-CWDDyBNapafKXE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTQzMDY1/NC0xNTEyNjM5NjA4/LTg0NDgucG5n.jpeg"
+        }
+    ],
+    "formats": [
+        {
+            "name": "Vinyl",
+            "qty": "1",
+            "descriptions": [
+                "LP",
+                "Album"
+            ]
+        }
+    ],
+    "data_quality": "Needs Vote",
+    "community": {
+        "have": 1319,
+        "want": 938,
+        "rating": {
+            "count": 64,
+            "average": 4.69
+        },
+        "submitter": {
+            "username": "frbost",
+            "resource_url": "https://api.discogs.com/users/frbost"
+        },
+        "contributors": [
+            {
+                "username": "frbost",
+                "resource_url": "https://api.discogs.com/users/frbost"
+            },
+            {
+                "username": "vinyl.ae",
+                "resource_url": "https://api.discogs.com/users/vinyl.ae"
+            },
+            {
+                "username": "DAVE-I.D.",
+                "resource_url": "https://api.discogs.com/users/DAVE-I.D."
+            },
+            {
+                "username": "rhetorick",
+                "resource_url": "https://api.discogs.com/users/rhetorick"
+            },
+            {
+                "username": "glennas94",
+                "resource_url": "https://api.discogs.com/users/glennas94"
+            },
+            {
+                "username": "Disc_Station",
+                "resource_url": "https://api.discogs.com/users/Disc_Station"
+            }
+        ],
+        "data_quality": "Needs Vote",
+        "status": "Accepted"
+    },
+    "format_quantity": 1,
+    "date_added": "2022-09-18T04:41:26-07:00",
+    "date_changed": "2024-03-18T18:09:10-07:00",
+    "num_for_sale": 5,
+    "lowest_price": 49.31,
+    "master_id": 2793302,
+    "master_url": "https://api.discogs.com/masters/2793302",
+    "title": "Everything I Know About Love",
+    "country": "Europe",
+    "released": "2022-09-09",
+    "notes": "The Debut Album includes coloured lyric booklet.",
+    "released_formatted": "09 Sep 2022",
+    "identifiers": [
+        {
+            "type": "Barcode",
+            "value": "5 056167 171461 >"
+        },
+        {
+            "type": "Label Code",
+            "value": "LC 30596"
+        },
+        {
+            "type": "Matrix / Runout",
+            "value": "245120E1/B",
+            "description": "Side A; stamped"
+        },
+        {
+            "type": "Matrix / Runout",
+            "value": "245120E2/A",
+            "description": "Side B; stamped"
+        }
+    ],
+    "videos": [
+        {
+            "uri": "https://www.youtube.com/watch?v=z2PzxLwA4rM",
+            "title": "Laufey - Everything I Know About Love (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 240,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=zs7u0qG9pNI",
+            "title": "Laufey - Fragile (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 249,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=Ej8RhiSv2-4",
+            "title": "Laufey - Falling Behind (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 174,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=I3GCiGavgpI",
+            "title": "Laufey - I've Never Been in Love Before (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 223,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=z2PzxLwA4rM",
+            "title": "Laufey - Everything I Know About Love (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 240,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=zs7u0qG9pNI",
+            "title": "Laufey - Fragile (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 249,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=Ej8RhiSv2-4",
+            "title": "Laufey - Falling Behind (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 174,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=I3GCiGavgpI",
+            "title": "Laufey - I've Never Been in Love Before (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey/\nTwitter: http",
+            "duration": 223,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=z2PzxLwA4rM",
+            "title": "Laufey - Everything I Know About Love (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 240,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=tyKu0uZS86Q",
+            "title": "Laufey - Valentine (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nAnimated by: Lilja Cardew\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https",
+            "duration": 169,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=zs7u0qG9pNI",
+            "title": "Laufey - Fragile (Official Video)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 249,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=Ej8RhiSv2-4",
+            "title": "Laufey - Falling Behind (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 174,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=I3GCiGavgpI",
+            "title": "Laufey - I've Never Been in Love Before (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 223,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=qVudRvCCNF8",
+            "title": "Laufey - Fragile (Official Audio)",
+            "description": "Official Audio for \"Fragile \" by Laufey\n\nstream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nIn",
+            "duration": 240,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=INmi-teOQLA",
+            "title": "Laufey - Beautiful Stranger (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 200,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=tz_dkwUq7b0",
+            "title": "Laufey - Above The Chinese Restaurant (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 224,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=uogdB-Ym_EY",
+            "title": "Laufey - Dear Soulmate (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 260,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=nUF_NyG7-04",
+            "title": "Laufey - What Love Will Do To You (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 172,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=yfdbfmHPdxo",
+            "title": "Laufey - Just Like Chet (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 216,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=YHIp2Y8ODCg",
+            "title": "Laufey - Hi (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 194,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=uA01QkPJeDw",
+            "title": "Laufey - Dance With You Tonight (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 159,
+            "embed": true
+        },
+        {
+            "uri": "https://www.youtube.com/watch?v=kNgyptlspPg",
+            "title": "Laufey - Night Light (Official Audio)",
+            "description": "stream or download  Everything I Know About Love (Deluxe Edition) here: https://laufey.ffm.to/eikaldeluxe\n\nFollow Laufey:\nSpotify: https://open.spotify.com/artist/7gW0r5CkdEUMm42w9XpyZO?si=mffOFx5BRjy_FYOSZYASPw\nInstagram: https://www.instagram.com/laufey",
+            "duration": 243,
+            "embed": true
+        }
+    ],
+    "genres": [
+        "Jazz",
+        "Pop"
+    ],
+    "styles": [
+        "Contemporary Jazz",
+        "Vocal"
+    ],
+    "tracklist": [
+        {
+            "position": "A1",
+            "type_": "track",
+            "title": "Fragile",
+            "extraartists": [
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Junia Lín",
+                    "anv": "",
+                    "join": "",
+                    "role": "Violin",
+                    "tracks": "",
+                    "id": 12148858,
+                    "resource_url": "https://api.discogs.com/artists/12148858"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "4:01"
+        },
+        {
+            "position": "A2",
+            "type_": "track",
+            "title": "Beautiful Stranger",
+            "extraartists": [
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Junia Lín",
+                    "anv": "",
+                    "join": "",
+                    "role": "Violin",
+                    "tracks": "",
+                    "id": 12148858,
+                    "resource_url": "https://api.discogs.com/artists/12148858"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "3:21"
+        },
+        {
+            "position": "A3",
+            "type_": "track",
+            "title": "Above The Chinese Restaurant",
+            "extraartists": [
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Philip Etherington",
+                    "anv": "Phillip Etherington",
+                    "join": "",
+                    "role": "Producer",
+                    "tracks": "",
+                    "id": 8915440,
+                    "resource_url": "https://api.discogs.com/artists/8915440"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "3:43"
+        },
+        {
+            "position": "A4",
+            "type_": "track",
+            "title": "Dear Soulmate",
+            "extraartists": [
+                {
+                    "name": "Sara Kawai",
+                    "anv": "",
+                    "join": "",
+                    "role": "Harp",
+                    "tracks": "",
+                    "id": 11977694,
+                    "resource_url": "https://api.discogs.com/artists/11977694"
+                },
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "4:20"
+        },
+        {
+            "position": "A5",
+            "type_": "track",
+            "title": "What Love Will Do To You",
+            "extraartists": [
+                {
+                    "name": "Karl McComas-Reichl",
+                    "anv": "",
+                    "join": "",
+                    "role": "Bass",
+                    "tracks": "",
+                    "id": 5819088,
+                    "resource_url": "https://api.discogs.com/artists/5819088"
+                },
+                {
+                    "name": "Ryan Shaw (7)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Drums",
+                    "tracks": "",
+                    "id": 6834749,
+                    "resource_url": "https://api.discogs.com/artists/6834749"
+                },
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Ted Case (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Piano",
+                    "tracks": "",
+                    "id": 9583090,
+                    "resource_url": "https://api.discogs.com/artists/9583090"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                }
+            ],
+            "duration": "2:51"
+        },
+        {
+            "position": "A6",
+            "type_": "track",
+            "title": "I've Never Been In Love Before",
+            "extraartists": [
+                {
+                    "name": "Karl McComas-Reichl",
+                    "anv": "",
+                    "join": "",
+                    "role": "Bass",
+                    "tracks": "",
+                    "id": 5819088,
+                    "resource_url": "https://api.discogs.com/artists/5819088"
+                },
+                {
+                    "name": "Ryan Shaw (7)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Drums",
+                    "tracks": "",
+                    "id": 6834749,
+                    "resource_url": "https://api.discogs.com/artists/6834749"
+                },
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Ted Case (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Piano",
+                    "tracks": "",
+                    "id": 9583090,
+                    "resource_url": "https://api.discogs.com/artists/9583090"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Producer",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Frank Loesser",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By",
+                    "tracks": "",
+                    "id": 439662,
+                    "resource_url": "https://api.discogs.com/artists/439662"
+                }
+            ],
+            "duration": "3:42"
+        },
+        {
+            "position": "B1",
+            "type_": "track",
+            "title": "Just Like Chet",
+            "extraartists": [
+                {
+                    "name": "Joe LaPorta",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mastered By",
+                    "tracks": "",
+                    "id": 600237,
+                    "resource_url": "https://api.discogs.com/artists/600237"
+                },
+                {
+                    "name": "Steve Kaye",
+                    "anv": "",
+                    "join": "",
+                    "role": "Mixed By",
+                    "tracks": "",
+                    "id": 42344,
+                    "resource_url": "https://api.discogs.com/artists/42344"
+                },
+                {
+                    "name": "Ricky Lucchese",
+                    "anv": "",
+                    "join": "",
+                    "role": "Trombone",
+                    "tracks": "",
+                    "id": 2775351,
+                    "resource_url": "https://api.discogs.com/artists/2775351"
+                },
+                {
+                    "name": "Joshua Shpak",
+                    "anv": "Josh Shpak",
+                    "join": "",
+                    "role": "Trumpet",
+                    "tracks": "",
+                    "id": 6242469,
+                    "resource_url": "https://api.discogs.com/artists/6242469"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "3:36"
+        },
+        {
+            "position": "B2",
+            "type_": "track",
+            "title": "Everything I Know About Love",
+            "extraartists": [
+                {
+                    "name": "Junia Lín",
+                    "anv": "",
+                    "join": "",
+                    "role": "Violin",
+                    "tracks": "",
+                    "id": 12148858,
+                    "resource_url": "https://api.discogs.com/artists/12148858"
+                },
+                {
+                    "name": "Wei Lin",
+                    "anv": "Wei Lín",
+                    "join": "",
+                    "role": "Violin",
+                    "tracks": "",
+                    "id": 825534,
+                    "resource_url": "https://api.discogs.com/artists/825534"
+                },
+                {
+                    "name": "Leroy Clampitt",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 2311499,
+                    "resource_url": "https://api.discogs.com/artists/2311499"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "3:30"
+        },
+        {
+            "position": "B3",
+            "type_": "track",
+            "title": "Falling Behind",
+            "extraartists": [
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                },
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                }
+            ],
+            "duration": "2:54"
+        },
+        {
+            "position": "B4",
+            "type_": "track",
+            "title": "Hi",
+            "extraartists": [
+                {
+                    "name": "Spencer Stewart (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Producer",
+                    "tracks": "",
+                    "id": 7765088,
+                    "resource_url": "https://api.discogs.com/artists/7765088"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "3:14"
+        },
+        {
+            "position": "B5",
+            "type_": "track",
+            "title": "Dance With You Tonight",
+            "extraartists": [
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                },
+                {
+                    "name": "Peter Fenn (3)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 9570910,
+                    "resource_url": "https://api.discogs.com/artists/9570910"
+                }
+            ],
+            "duration": "2:39"
+        },
+        {
+            "position": "B6",
+            "type_": "track",
+            "title": "Night Light",
+            "extraartists": [
+                {
+                    "name": "Junia Lín",
+                    "anv": "",
+                    "join": "",
+                    "role": "Violin",
+                    "tracks": "",
+                    "id": 12148858,
+                    "resource_url": "https://api.discogs.com/artists/12148858"
+                },
+                {
+                    "name": "Leroy Clampitt",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer",
+                    "tracks": "",
+                    "id": 2311499,
+                    "resource_url": "https://api.discogs.com/artists/2311499"
+                },
+                {
+                    "name": "Laufey (2)",
+                    "anv": "",
+                    "join": "",
+                    "role": "Written-By, Producer, Cello",
+                    "tracks": "",
+                    "id": 10016131,
+                    "resource_url": "https://api.discogs.com/artists/10016131"
+                }
+            ],
+            "duration": "4:02"
+        }
+    ],
+    "extraartists": [
+        {
+            "name": "Jackie Karlsson",
+            "anv": "",
+            "join": "",
+            "role": "Administrator [A&R], Management [Day to Day]",
+            "tracks": "",
+            "id": 11403818,
+            "resource_url": "https://api.discogs.com/artists/11403818"
+        },
+        {
+            "name": "Nick Matthews (4)",
+            "anv": "",
+            "join": "",
+            "role": "Booking",
+            "tracks": "",
+            "id": 5199578,
+            "resource_url": "https://api.discogs.com/artists/5199578"
+        },
+        {
+            "name": "Zac Bluestone",
+            "anv": "",
+            "join": "",
+            "role": "Booking",
+            "tracks": "",
+            "id": 6825159,
+            "resource_url": "https://api.discogs.com/artists/6825159"
+        },
+        {
+            "name": "Junia Lín",
+            "anv": "",
+            "join": "",
+            "role": "Creative Director",
+            "tracks": "",
+            "id": 12148858,
+            "resource_url": "https://api.discogs.com/artists/12148858"
+        },
+        {
+            "name": "Kelly Ford (2)",
+            "anv": "",
+            "join": "",
+            "role": "Design [Vinyl Packaging Design]",
+            "tracks": "",
+            "id": 11911202,
+            "resource_url": "https://api.discogs.com/artists/11911202"
+        },
+        {
+            "name": "Spencer Stewart (3)",
+            "anv": "",
+            "join": "",
+            "role": "Executive-Producer",
+            "tracks": "",
+            "id": 7765088,
+            "resource_url": "https://api.discogs.com/artists/7765088"
+        },
+        {
+            "name": "Jaimie Roberts",
+            "anv": "",
+            "join": "",
+            "role": "Legal",
+            "tracks": "",
+            "id": 2063400,
+            "resource_url": "https://api.discogs.com/artists/2063400"
+        },
+        {
+            "name": "Katelyn Wicks",
+            "anv": "",
+            "join": "",
+            "role": "Legal",
+            "tracks": "",
+            "id": 9034066,
+            "resource_url": "https://api.discogs.com/artists/9034066"
+        },
+        {
+            "name": "Bill Tannenbaum",
+            "anv": "",
+            "join": "",
+            "role": "Management [Business Management]",
+            "tracks": "",
+            "id": 6936417,
+            "resource_url": "https://api.discogs.com/artists/6936417"
+        },
+        {
+            "name": "Mike Skeet (2)",
+            "anv": "",
+            "join": "",
+            "role": "Management [Business Management]",
+            "tracks": "",
+            "id": 4922331,
+            "resource_url": "https://api.discogs.com/artists/4922331"
+        },
+        {
+            "name": "Max Gredinger",
+            "anv": "",
+            "join": "",
+            "role": "Management, A&R",
+            "tracks": "",
+            "id": 6825156,
+            "resource_url": "https://api.discogs.com/artists/6825156"
+        },
+        {
+            "name": "Gemma Warren",
+            "anv": "",
+            "join": "",
+            "role": "Photography By",
+            "tracks": "",
+            "id": 4108797,
+            "resource_url": "https://api.discogs.com/artists/4108797"
+        },
+        {
+            "name": "Sarah Goodman",
+            "anv": "",
+            "join": "",
+            "role": "Product Manager",
+            "tracks": "",
+            "id": 12148861,
+            "resource_url": "https://api.discogs.com/artists/12148861"
+        },
+        {
+            "name": "Bradley Bledsoe",
+            "anv": "",
+            "join": "",
+            "role": "Public Relations [Publicity]",
+            "tracks": "",
+            "id": 5517336,
+            "resource_url": "https://api.discogs.com/artists/5517336"
+        },
+        {
+            "name": "Kevin Cordon",
+            "anv": "",
+            "join": "",
+            "role": "Public Relations [Publicity]",
+            "tracks": "",
+            "id": 11110331,
+            "resource_url": "https://api.discogs.com/artists/11110331"
+        },
+        {
+            "name": "Sinead Mills",
+            "anv": "",
+            "join": "",
+            "role": "Public Relations [Publicity]",
+            "tracks": "",
+            "id": 6029434,
+            "resource_url": "https://api.discogs.com/artists/6029434"
+        }
+    ],
+    "images": [
+        {
+            "type": "primary",
+            "uri": "https://i.discogs.com/3Oyc2ROpS4pBSKtgTeFCpfJOPAYbEUCPZ1eFfxUbSvY/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTEtNTc4Mi5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/3Oyc2ROpS4pBSKtgTeFCpfJOPAYbEUCPZ1eFfxUbSvY/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTEtNTc4Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/_tets2Yvq7Pol1hgIqguRV9qw6Hdph_-VVueVXjMJKE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTEtNTc4Mi5qcGVn.jpeg",
+            "width": 596,
+            "height": 600
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/1aO9TX3tKzO7mmZs8ywz73k1YE4l0k7b6z_cbCVzays/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTUtMTA1Mi5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/1aO9TX3tKzO7mmZs8ywz73k1YE4l0k7b6z_cbCVzays/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTUtMTA1Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/CTMwGlMAOTBXsIVqOpwBn_jlELXZYwdXLRJw8ssw4l0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTUtMTA1Mi5qcGVn.jpeg",
+            "width": 600,
+            "height": 599
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/A2uV-mu2WUNlR5Tob08a2M2uLErAczev6BTpzbzjJy0/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDEtMjQzMC5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/A2uV-mu2WUNlR5Tob08a2M2uLErAczev6BTpzbzjJy0/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDEtMjQzMC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/mnZyMLkMHGAZwB9to1d1uDcP48BnHJXoKkIJNbF_Zw4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDEtMjQzMC5qcGVn.jpeg",
+            "width": 600,
+            "height": 594
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/uDtfADUaKMfuQGVMG62i-C2RAb3ZxxUZ3GJlBc9qzB0/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MzktOTMyMi5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/uDtfADUaKMfuQGVMG62i-C2RAb3ZxxUZ3GJlBc9qzB0/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MzktOTMyMi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/bFsUnfDXf0bs0fA10y5Ip9_sElRkPrvPV99_tVKmVIY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MzktOTMyMi5qcGVn.jpeg",
+            "width": 600,
+            "height": 588
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/vgsgyzq-HAZkLmDVe9lpSDtiMPue5VcS_QRULTAW7Pw/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDUtMzQxMC5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/vgsgyzq-HAZkLmDVe9lpSDtiMPue5VcS_QRULTAW7Pw/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDUtMzQxMC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/3bvwChvbSs4yyg5obFOj1nsnVsC6SnhjA957aPYBxgU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/MDUtMzQxMC5qcGVn.jpeg",
+            "width": 600,
+            "height": 593
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/8Kw2_gV9Wh0AV2aO4YfbErg7_agO1mAEx4oGmU5K_64/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTQtNzUyMS5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/8Kw2_gV9Wh0AV2aO4YfbErg7_agO1mAEx4oGmU5K_64/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTQtNzUyMS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/_jiL4qoCu-CprmkTJMFj5sby-6M4uZivo7wx1oPVlwU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTQtNzUyMS5qcGVn.jpeg",
+            "width": 600,
+            "height": 587
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/UXS8ebWiZP3cao3ONkBVI6IE3tdBYg4utLgPKa-8D5U/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTgtMzUzMC5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/UXS8ebWiZP3cao3ONkBVI6IE3tdBYg4utLgPKa-8D5U/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTgtMzUzMC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/755Be83SoKcgey50jweWbpdteD6w--I-jw8CNDbDHoU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NTgtMzUzMC5qcGVn.jpeg",
+            "width": 600,
+            "height": 591
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/rYROpB8N5lzicwAQ-f3ijofUAaNcNtGFFQXUTQZ1fQs/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NjQtMzY2My5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/rYROpB8N5lzicwAQ-f3ijofUAaNcNtGFFQXUTQZ1fQs/rs:fit/g:sm/q:90/h:586/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NjQtMzY2My5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/SgETl5JJ4dnq87M37Ei1BlhUEFpQxJwfuQo0Rdv_BPg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NjQtMzY2My5qcGVn.jpeg",
+            "width": 600,
+            "height": 586
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/LvEKWvT7mdx0beDmHshGDg6Jm2rYxCS40jqL7r0aYnE/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzMtOTk1Ny5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/LvEKWvT7mdx0beDmHshGDg6Jm2rYxCS40jqL7r0aYnE/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzMtOTk1Ny5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/6AF9gDN41z7BP5NOl-xKQ1tLOzc-yxIQ8NHQNMjcMd0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzMtOTk1Ny5qcGVn.jpeg",
+            "width": 600,
+            "height": 592
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/klpVn3gTsUh0ji0kt9hYFxb8cL0MUA8Jk47N8rZ9_wg/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzYtMTU3MS5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/klpVn3gTsUh0ji0kt9hYFxb8cL0MUA8Jk47N8rZ9_wg/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzYtMTU3MS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/_S85X8gGeHBFVpQQPgHiI1wOoiLWj8z_JgjpvsCsSGA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/NzYtMTU3MS5qcGVn.jpeg",
+            "width": 600,
+            "height": 588
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/VcfE3pV47_wDKpJOUBZhnoIIHp7H2VlRRxluuSoh5vY/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/ODQtMzgwOC5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/VcfE3pV47_wDKpJOUBZhnoIIHp7H2VlRRxluuSoh5vY/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/ODQtMzgwOC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/H0HFf2W19coxB8IYyvQ-Cw5U1VLlAh6lSfHGqP4u260/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/ODQtMzgwOC5qcGVn.jpeg",
+            "width": 600,
+            "height": 588
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/BKSXyL_AFkvhnA5MuQyWsi1AOmtuMvn6vRHuXKEn7i8/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/OTEtOTU2Ni5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/BKSXyL_AFkvhnA5MuQyWsi1AOmtuMvn6vRHuXKEn7i8/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/OTEtOTU2Ni5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/lqUkwLAVgcrGkKfJpbmsDdH99PzErSiPazeaHMIcRs0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEz/OTEtOTU2Ni5qcGVn.jpeg",
+            "width": 600,
+            "height": 590
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/uHrudtQjGwDiEpN2yrhX4H0H_gVn3evWewSWJ01oKRI/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDEtMzIzNC5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/uHrudtQjGwDiEpN2yrhX4H0H_gVn3evWewSWJ01oKRI/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDEtMzIzNC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/v8qC2JGqQKKwqpH8Ashufl03SOprPGqOnxt0Im4XpVY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDEtMzIzNC5qcGVn.jpeg",
+            "width": 600,
+            "height": 589
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/uY9uEhbJVC9OjGJo1BDNb0XIPMYXW4inVCJa-tUZd9A/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDktMjAxMy5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/uY9uEhbJVC9OjGJo1BDNb0XIPMYXW4inVCJa-tUZd9A/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDktMjAxMy5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/Xj0iZ7yeYwE7PYNEZ8JMa8xgo0RBee6cahbkg4UMpls/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MDktMjAxMy5qcGVn.jpeg",
+            "width": 600,
+            "height": 595
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/DDiLrNhUBWZ-n1KfBXYNc6wyt9C7ptWJZ8BgzaTkmzg/rs:fit/g:sm/q:90/h:600/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MTktMzkyOS5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/DDiLrNhUBWZ-n1KfBXYNc6wyt9C7ptWJZ8BgzaTkmzg/rs:fit/g:sm/q:90/h:600/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MTktMzkyOS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/fpVT7BJo86ouZtg0ModnRyKcqsIMuyIbIYQXMDbywUs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MTktMzkyOS5qcGVn.jpeg",
+            "width": 590,
+            "height": 600
+        },
+        {
+            "type": "secondary",
+            "uri": "https://i.discogs.com/277LTHc1fhU5ePrZLx3KKEhR7B4hoOMb-e8UZ3YUjT8/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MjEtMzc5Mi5qcGVn.jpeg",
+            "resource_url": "https://i.discogs.com/277LTHc1fhU5ePrZLx3KKEhR7B4hoOMb-e8UZ3YUjT8/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MjEtMzc5Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/KR33zxyPYcMZR9WqciA9fgOWh6nCBQBkEAHHfhrtEsE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDE0/MjEtMzc5Mi5qcGVn.jpeg",
+            "width": 599,
+            "height": 600
+        }
+    ],
+    "thumb": "https://i.discogs.com/_tets2Yvq7Pol1hgIqguRV9qw6Hdph_-VVueVXjMJKE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0NTUy/ODkzLTE2NjM1MDEy/OTEtNTc4Mi5qcGVn.jpeg",
+    "estimated_weight": 230,
+    "blocked_from_sale": false
+}%          
