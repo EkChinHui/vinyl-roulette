@@ -116,7 +116,7 @@ html, body {
   border-radius: 20px;
   position: relative;
   width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -244,6 +244,126 @@ html, body {
   }
 }
 
+/* Genre and Style Tags */
+.album-genres {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.album-genres h3 {
+  color: #f9dd50;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.genre-tag, .style-tag {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.genre-tag {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.style-tag {
+  background: linear-gradient(45deg, #2980B9, #3498db);
+  color: white;
+}
+
+.genre-tag:hover, .style-tag:hover {
+  transform: translateY(-2px);
+}
+
+/* Tracklist */
+.album-tracklist {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.album-tracklist h3 {
+  color: #f9dd50;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.track-list {
+  list-style: none;
+  counter-reset: track-counter;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.track-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  counter-increment: track-counter;
+}
+
+.track-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.track-item::before {
+  content: counter(track-counter) ". ";
+  color: #f9dd50;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.track-title {
+  flex: 1;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.track-duration {
+  color: #aaaaaa;
+  font-size: 0.85rem;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+.album-title {
+  font-weight: 500;
+}
+
+/* Scrollbar styling for tracklist */
+.track-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.track-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.track-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.track-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 @media (max-width: 768px) {
   .header h1 {
     font-size: 2.5rem;
@@ -266,5 +386,9 @@ html, body {
   .spin-button {
     padding: 1rem 3rem;
     font-size: 1.2rem;
+  }
+
+  .track-list {
+    max-height: 200px;
   }
 } 

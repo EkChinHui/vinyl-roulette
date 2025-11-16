@@ -31,12 +31,21 @@ interface ReleaseImage {
   height: number;
 }
 
+export interface Track {
+  position: string;
+  title: string;
+  duration: string;
+}
+
 export interface ReleaseDetails {
   id: number;
   title: string;
   artists: Array<{ name: string }>;
   year: number;
   images: ReleaseImage[];
+  tracklist: Track[];
+  genres: string[];
+  styles?: string[];
 }
 
 export interface RouletteData {

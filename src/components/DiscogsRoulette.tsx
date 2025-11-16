@@ -148,17 +148,49 @@ const DiscogsRoulette = () => {
         {selectedAlbum && (
           <div className="album-details">
             <h2>Your Next Vinyl</h2>
-            <p>{selectedAlbum.option}</p>
+            <p className="album-title">{selectedAlbum.option}</p>
             {isLoadingDetails ? (
               <div className="loading-image">Loading album details...</div>
             ) : (
-              selectedAlbumDetails?.images && selectedAlbumDetails.images.length > 0 && (
-                <img
-                  src={selectedAlbumDetails.images[0].resource_url}
-                  alt={selectedAlbum.option}
-                  className="album-image"
-                />
-              )
+              <>
+                {selectedAlbumDetails?.images && selectedAlbumDetails.images.length > 0 && (
+                  <img
+                    src={selectedAlbumDetails.images[0].resource_url}
+                    alt={selectedAlbum.option}
+                    className="album-image"
+                  />
+                )}
+
+                {selectedAlbumDetails?.genres && selectedAlbumDetails.genres.length > 0 && (
+                  <div className="album-genres">
+                    <h3>Genre</h3>
+                    <div className="genre-tags">
+                      {selectedAlbumDetails.genres.map((genre, index) => (
+                        <span key={index} className="genre-tag">{genre}</span>
+                      ))}
+                      {selectedAlbumDetails.styles && selectedAlbumDetails.styles.map((style, index) => (
+                        <span key={`style-${index}`} className="style-tag">{style}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {selectedAlbumDetails?.tracklist && selectedAlbumDetails.tracklist.length > 0 && (
+                  <div className="album-tracklist">
+                    <h3>Tracklist</h3>
+                    <ol className="track-list">
+                      {selectedAlbumDetails.tracklist.map((track, index) => (
+                        <li key={index} className="track-item">
+                          <span className="track-title">{track.title}</span>
+                          {track.duration && (
+                            <span className="track-duration">{track.duration}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
