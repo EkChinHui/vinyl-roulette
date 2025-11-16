@@ -20,6 +20,8 @@ interface BasicInformation {
   artists: Array<{ name: string }>;
   year: number;
   cover_image?: string;
+  genres?: string[];
+  styles?: string[];
 }
 
 interface ReleaseImage {
