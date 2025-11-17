@@ -20,6 +20,8 @@ interface BasicInformation {
   artists: Array<{ name: string }>;
   year: number;
   cover_image?: string;
+  genres?: string[];
+  styles?: string[];
 }
 
 interface ReleaseImage {
@@ -31,12 +33,21 @@ interface ReleaseImage {
   height: number;
 }
 
+export interface Track {
+  position: string;
+  title: string;
+  duration: string;
+}
+
 export interface ReleaseDetails {
   id: number;
   title: string;
   artists: Array<{ name: string }>;
   year: number;
   images: ReleaseImage[];
+  tracklist: Track[];
+  genres: string[];
+  styles?: string[];
 }
 
 export interface RouletteData {
