@@ -13,7 +13,6 @@
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "react": "^19.0.0",
-    "react-custom-roulette": "^1.4.1",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {

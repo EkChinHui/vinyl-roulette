@@ -9,11 +9,11 @@ declare global {
 }
 
 const DISCOGS_API_URL = 'https://api.discogs.com';
-const username = window._env_?.VITE_DISCOGS_USERNAME || import.meta.env.VITE_DISCOGS_USERNAME;
 
-if (!username) {
-  console.error('Discogs username not configured! Please set VITE_DISCOGS_USERNAME environment variable.');
-}
+const getEnvUsername = () => {
+  // return window._env_?.VITE_DISCOGS_USERNAME || import.meta.env.VITE_DISCOGS_USERNAME;
+  return undefined;
+};
 
 interface BasicInformation {
   title: string;
@@ -37,6 +37,7 @@ export interface Track {
   position: string;
   title: string;
   duration: string;
+  
 }
 
 export interface ReleaseDetails {
@@ -74,14 +75,16 @@ export const fetchReleaseDetails = async (releaseId: number): Promise<ReleaseDet
   }
 };
 
-export const fetchCollection = async (): Promise<RouletteData[]> => {
-  if (!username) {
+export const fetchCollection = async (username?: string): Promise<RouletteData[]> => {
+  const targetUsername = username || getEnvUsername();
+
+  if (!targetUsername) {
     throw new Error('Discogs username not configured!');
   }
 
   try {
     const response = await axios.get(
-      `${DISCOGS_API_URL}/users/${username}/collection/folders/0/releases`,
+      `${DISCOGS_API_URL}/users/${targetUsername}/collection/folders/0/releases`,
       { headers }
     );
 
@@ -95,4 +98,4 @@ export const fetchCollection = async (): Promise<RouletteData[]> => {
     console.error('Error fetching collection:', error);
     throw error;
   }
-}; 
+};
