@@ -58,15 +58,10 @@ export interface RouletteData {
   basic_information: BasicInformation;
 }
 
-const headers = {
-  'User-Agent': 'DiscogsRouletteApp/1.0'
-};
-
 export const fetchReleaseDetails = async (releaseId: number): Promise<ReleaseDetails> => {
   try {
     const response = await axios.get(
-      `${DISCOGS_API_URL}/releases/${releaseId}`,
-      { headers }
+      `${DISCOGS_API_URL}/releases/${releaseId}`
     );
     return response.data;
   } catch (error) {
@@ -84,8 +79,7 @@ export const fetchCollection = async (username?: string): Promise<RouletteData[]
 
   try {
     const response = await axios.get(
-      `${DISCOGS_API_URL}/users/${targetUsername}/collection/folders/0/releases`,
-      { headers }
+      `${DISCOGS_API_URL}/users/${targetUsername}/collection/folders/0/releases`
     );
 
     return response.data.releases.map((release: any) => ({

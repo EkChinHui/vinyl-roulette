@@ -28,6 +28,9 @@ const DiscogsRoulette = () => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<RouletteData[]>([]);
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
+  const [shouldResetTonearm, setShouldResetTonearm] = useState(false);
+  const [spinSpeed, setSpinSpeed] = useState<'33' | '45'>('33');
+  const [isManualStop, setIsManualStop] = useState(false);
 
   // Get the base path from Vite config (handles GitHub Pages deployment)
   const basePath = import.meta.env.BASE_URL || '/';
@@ -144,6 +147,7 @@ const DiscogsRoulette = () => {
       // ESC to close modal
       if (event.code === 'Escape' && isModalOpen) {
         setIsModalOpen(false);
+        setShouldResetTonearm(true);
       }
     };
 
@@ -173,6 +177,8 @@ const DiscogsRoulette = () => {
       setSelectedAlbum(null);
       setSelectedAlbumDetails(null);
       setIsModalOpen(false);
+      setShouldResetTonearm(false);
+      setIsManualStop(false);
 
       // Start loading the album details immediately
       const selectedAlbum = filteredData[newPrizeNumber];
@@ -197,7 +203,29 @@ const DiscogsRoulette = () => {
   const handleSpinStop = () => {
     setMustSpin(false);
     setSelectedAlbum(filteredData[prizeNumber]);
-    setIsModalOpen(true);
+    // Delay modal opening to allow tonearm animation to complete
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 1000); // 1 second delay
+  };
+
+  const handleSpeedToggle = () => {
+    setSpinSpeed(prev => prev === '33' ? '45' : '33');
+  };
+
+  const getSpinDuration = () => spinSpeed === '33' ? 2.0 : 1.0;
+
+  const handleStopClick = () => {
+    if (mustSpin && !isManualStop) {
+      setIsManualStop(true);
+    }
+  };
+
+  const handleStopComplete = () => {
+    setMustSpin(false);
+    setIsManualStop(false);
+    setSelectedAlbum(filteredData[prizeNumber]);
+    setTimeout(() => setIsModalOpen(true), 1000);
   };
 
   const handleUsernameSubmit = (e: React.FormEvent) => {
@@ -207,6 +235,7 @@ const DiscogsRoulette = () => {
       localStorage.setItem('discogs_username', newUsername);
       setUsername(newUsername);
       setIsConfigured(true);
+      setError(null); // Clear any previous errors
       updateUrl(newUsername);
     }
   };
@@ -214,6 +243,7 @@ const DiscogsRoulette = () => {
   const handleChangeUser = () => {
     setIsConfigured(false);
     setInputUsername('');
+    setError(null); // Clear any previous errors
     updateUrl(''); // Clear URL path
     // Clear data to avoid showing old data while new data loads
     setData([]);
@@ -428,17 +458,19 @@ const DiscogsRoulette = () => {
         </div>
       )}
 
-      <div
-        className={`wheel-container ${mustSpin ? 'spinning' : ''}`}
-        onClick={() => !mustSpin && filteredData.length > 0 && handleSpinClick()}
-        style={{ cursor: mustSpin ? 'default' : 'pointer' }}
-      >
+      <div className={`wheel-container ${mustSpin ? 'spinning' : ''}`}>
         <RouletteWheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
           data={wheelData}
           onStopSpinning={handleSpinStop}
-          resetTonearm={!isModalOpen && selectedAlbum !== null}
+          shouldStop={isManualStop}
+          onStopComplete={handleStopComplete}
+          resetTonearm={shouldResetTonearm}
+          spinSpeed={spinSpeed}
+          onSpeedToggle={handleSpeedToggle}
+          onStopClick={handleStopClick}
+          onStartClick={handleSpinClick}
           backgroundColors={[
             '#2C3E50', // Dark blue
             '#E74C3C', // Coral red
@@ -460,8 +492,8 @@ const DiscogsRoulette = () => {
           radiusLineColor="rgba(0,0,0,0.3)"
           radiusLineWidth={2}
           fontSize={11}
-          spinDuration={1.5}
-          textDistance={65}
+          spinDuration={getSpinDuration()}
+          textDistance={85}
           perpendicularText={false}
           enableSound={true}
         />
@@ -473,7 +505,10 @@ const DiscogsRoulette = () => {
         </div>
       )}
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onClose={() => {
+        setIsModalOpen(false);
+        setShouldResetTonearm(true);
+      }}>
         {selectedAlbum && (
           <div className="album-details">
             <h2>Your Next Vinyl</h2>
