@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import RouletteWheel from './RouletteWheel';
 import { fetchCollection, fetchReleaseDetails, RouletteData, ReleaseDetails } from '../services/discogsService';
 import Modal from './Modal';
@@ -15,6 +15,7 @@ const truncateText = (text: string, maxLength: number = 20): string => {
 
 const DiscogsRoulette = () => {
   const [mustSpin, setMustSpin] = useState(false);
+  const [isRouletteMode, setIsRouletteMode] = useState(false); // true = roulette spin, false = cosmetic spin
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [data, setData] = useState<RouletteData[]>([]);
   const [wheelData, setWheelData] = useState<WheelData[]>([]);
@@ -31,6 +32,20 @@ const DiscogsRoulette = () => {
   const [shouldResetTonearm, setShouldResetTonearm] = useState(false);
   const [spinSpeed, setSpinSpeed] = useState<'33' | '45'>('33');
   const [isManualStop, setIsManualStop] = useState(false);
+  const [isWheelTransitioning, setIsWheelTransitioning] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const prevFilteredLength = useRef<number>(0);
+
+  // Detect screen size for responsive help display
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobileOrTablet(window.innerWidth <= 900);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Get the base path from Vite config (handles GitHub Pages deployment)
   const basePath = import.meta.env.BASE_URL || '/';
@@ -117,37 +132,48 @@ const DiscogsRoulette = () => {
 
   // Filter data when selected genres change
   useEffect(() => {
+    let newFilteredData: RouletteData[];
+
     if (selectedGenres.length === 0) {
-      setFilteredData(data);
-      setWheelData(data.map(album => ({
-        option: truncateText(album.basic_information.title)
-      })));
+      newFilteredData = data;
     } else {
-      const filtered = data.filter(album => {
+      newFilteredData = data.filter(album => {
         if (!album.basic_information.genres) return false;
         return album.basic_information.genres.some(genre =>
           selectedGenres.includes(genre)
         );
       });
-      setFilteredData(filtered);
-      setWheelData(filtered.map(album => ({
-        option: truncateText(album.basic_information.title)
-      })));
     }
+
+    // Trigger wheel transition animation if the count changed
+    if (prevFilteredLength.current !== 0 && prevFilteredLength.current !== newFilteredData.length) {
+      setIsWheelTransitioning(true);
+      setTimeout(() => setIsWheelTransitioning(false), 400);
+    }
+    prevFilteredLength.current = newFilteredData.length;
+
+    setFilteredData(newFilteredData);
+    setWheelData(newFilteredData.map(album => ({
+      option: truncateText(album.basic_information.title)
+    })));
   }, [selectedGenres, data]);
 
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      // Spacebar to spin
+      // Spacebar to spin roulette
       if (event.code === 'Space' && !mustSpin && filteredData.length > 0 && !isModalOpen && isConfigured) {
         event.preventDefault();
-        handleSpinClick();
+        handleWheelClick();
       }
-      // ESC to close modal
-      if (event.code === 'Escape' && isModalOpen) {
-        setIsModalOpen(false);
-        setShouldResetTonearm(true);
+      // ESC to close modal or help
+      if (event.code === 'Escape') {
+        if (isHelpOpen) {
+          setIsHelpOpen(false);
+        } else if (isModalOpen) {
+          setIsModalOpen(false);
+          setShouldResetTonearm(true);
+        }
       }
     };
 
@@ -155,7 +181,7 @@ const DiscogsRoulette = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [mustSpin, filteredData, isModalOpen, isConfigured]);
+  }, [mustSpin, filteredData, isModalOpen, isConfigured, isHelpOpen]);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres(prev =>
@@ -169,10 +195,22 @@ const DiscogsRoulette = () => {
     setSelectedGenres([]);
   };
 
-  const handleSpinClick = () => {
+  // Start button - just start spinning (cosmetic mode)
+  const handleStartClick = () => {
+    if (!mustSpin && filteredData.length > 0) {
+      setIsRouletteMode(false); // Cosmetic mode
+      setMustSpin(true);
+      setShouldResetTonearm(false);
+      setIsManualStop(false);
+    }
+  };
+
+  // Click on wheel - roulette mode (spin and select album)
+  const handleWheelClick = () => {
     if (!mustSpin && filteredData.length > 0) {
       const newPrizeNumber = Math.floor(Math.random() * filteredData.length);
       setPrizeNumber(newPrizeNumber);
+      setIsRouletteMode(true); // Roulette mode
       setMustSpin(true);
       setSelectedAlbum(null);
       setSelectedAlbumDetails(null);
@@ -181,11 +219,10 @@ const DiscogsRoulette = () => {
       setIsManualStop(false);
 
       // Start loading the album details immediately
-      const selectedAlbum = filteredData[newPrizeNumber];
+      const album = filteredData[newPrizeNumber];
       setIsLoadingDetails(true);
-      fetchReleaseDetails(selectedAlbum.id)
+      fetchReleaseDetails(album.id)
         .then(details => {
-          // Preload the album art image into browser cache
           if (details?.images && details.images.length > 0) {
             const img = new Image();
             img.src = details.images[0].resource_url;
@@ -200,32 +237,59 @@ const DiscogsRoulette = () => {
     }
   };
 
-  const handleSpinStop = () => {
+  // Roulette spin complete - show album
+  const handleRouletteComplete = () => {
     setMustSpin(false);
     setSelectedAlbum(filteredData[prizeNumber]);
-    // Delay modal opening to allow tonearm animation to complete
     setTimeout(() => {
       setIsModalOpen(true);
-    }, 1000); // 1 second delay
+    }, 1000);
   };
 
   const handleSpeedToggle = () => {
     setSpinSpeed(prev => prev === '33' ? '45' : '33');
   };
 
-  const getSpinDuration = () => spinSpeed === '33' ? 2.0 : 1.0;
-
+  // Stop button - stop spinning and disengage tonearm (cosmetic mode only)
   const handleStopClick = () => {
-    if (mustSpin && !isManualStop) {
+    if (mustSpin && !isManualStop && !isRouletteMode) {
       setIsManualStop(true);
     }
   };
 
-  const handleStopComplete = () => {
+  // Cosmetic stop complete - select the album it stopped on
+  const handleStopComplete = (stoppedIndex: number) => {
     setMustSpin(false);
     setIsManualStop(false);
-    setSelectedAlbum(filteredData[prizeNumber]);
-    setTimeout(() => setIsModalOpen(true), 1000);
+    setIsRouletteMode(false);
+
+    // Select the album at the stopped position
+    if (filteredData.length > 0 && stoppedIndex >= 0 && stoppedIndex < filteredData.length) {
+      const album = filteredData[stoppedIndex];
+      setSelectedAlbum(album);
+      setPrizeNumber(stoppedIndex);
+
+      // Fetch album details
+      setIsLoadingDetails(true);
+      fetchReleaseDetails(album.id)
+        .then(details => {
+          if (details?.images && details.images.length > 0) {
+            const img = new Image();
+            img.src = details.images[0].resource_url;
+          }
+          setSelectedAlbumDetails(details);
+          setIsLoadingDetails(false);
+        })
+        .catch(err => {
+          console.error('Failed to fetch album details:', err);
+          setIsLoadingDetails(false);
+        });
+
+      // Show modal after a brief delay
+      setTimeout(() => {
+        setIsModalOpen(true);
+      }, 500);
+    }
   };
 
   const handleUsernameSubmit = (e: React.FormEvent) => {
@@ -416,12 +480,97 @@ const DiscogsRoulette = () => {
         </div>
         <div className="collection-info">
           {selectedGenres.length > 0 ? (
-            <span>Spinning from {filteredData.length} of {data.length} albums</span>
+            <span key={`filtered-${filteredData.length}`}>Spinning from {filteredData.length} of {data.length} albums</span>
           ) : (
-            <span>{data.length} albums in your collection</span>
+            <span key="all">{data.length} albums in your collection</span>
           )}
         </div>
       </div>
+
+      <button className="help-button" onClick={() => setIsHelpOpen(true)} aria-label="Help">
+        ?
+      </button>
+
+      {isHelpOpen && (
+        isMobileOrTablet ? (
+          <div className="help-modal-overlay" onClick={() => setIsHelpOpen(false)}>
+            <div className="help-modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="help-modal-header">
+                <h2>How to Use</h2>
+                <button className="help-modal-close" onClick={() => setIsHelpOpen(false)}>×</button>
+              </div>
+              <div className="help-modal-items">
+                <div className="help-modal-item">
+                  <div className="help-modal-icon">&#9673;</div>
+                  <div className="help-modal-text">
+                    <h3>Click the Record</h3>
+                    <p>Spin the roulette to randomly select an album from your collection</p>
+                  </div>
+                </div>
+                <div className="help-modal-item">
+                  <div className="help-modal-icon">&#9654;</div>
+                  <div className="help-modal-text">
+                    <h3>Playback Controls</h3>
+                    <p>START spins continuously, STOP selects where it lands, toggle between 33/45 RPM</p>
+                  </div>
+                </div>
+                <div className="help-modal-item">
+                  <div className="help-modal-icon">&#9835;</div>
+                  <div className="help-modal-text">
+                    <h3>Filter by Genre</h3>
+                    <p>Narrow down your collection by selecting genres from the filter panel</p>
+                  </div>
+                </div>
+                <div className="help-modal-item">
+                  <div className="help-modal-icon">&#8634;</div>
+                  <div className="help-modal-text">
+                    <h3>Change Collection</h3>
+                    <p>Switch to a different Discogs username to explore another collection</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="help-overlay-annotations" onClick={() => setIsHelpOpen(false)}>
+            <div className="annotation annotation-record">
+              <div className="annotation-content">
+                <strong>Click the Record</strong>
+                <p>Spin the roulette to randomly select an album</p>
+              </div>
+              <div className="annotation-arrow annotation-arrow-right"></div>
+            </div>
+
+            <div className="annotation annotation-buttons">
+              <div className="annotation-content">
+                <strong>Playback Controls</strong>
+                <p>START spins continuously, STOP selects where it lands, SPEED toggles 33/45 RPM</p>
+              </div>
+              <div className="annotation-arrow annotation-arrow-down"></div>
+            </div>
+
+            <div className="annotation annotation-genre">
+              <div className="annotation-content">
+                <strong>Filter by Genre</strong>
+                <p>Narrow down your collection by selecting genres</p>
+              </div>
+              <div className="annotation-arrow annotation-arrow-down"></div>
+            </div>
+
+            <div className="annotation annotation-user">
+              <div className="annotation-arrow annotation-arrow-left"></div>
+              <div className="annotation-content">
+                <strong>Change Collection</strong>
+                <p>Switch to a different Discogs username</p>
+              </div>
+            </div>
+
+            <div className="annotation annotation-dismiss">
+              Click anywhere to dismiss
+            </div>
+          </div>
+        )
+      )}
 
       {availableGenres.length > 0 && (
         <div className={`genre-filter ${isFilterExpanded ? 'expanded' : 'collapsed'}`}>
@@ -432,7 +581,7 @@ const DiscogsRoulette = () => {
             <span className="filter-toggle-label">
               Filter by Genre
               {selectedGenres.length > 0 && (
-                <span className="filter-count">{selectedGenres.length}</span>
+                <span key={selectedGenres.length} className="filter-count">{selectedGenres.length}</span>
               )}
             </span>
             <span className={`filter-toggle-icon ${isFilterExpanded ? 'expanded' : ''}`}>▼</span>
@@ -463,14 +612,17 @@ const DiscogsRoulette = () => {
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
           data={wheelData}
-          onStopSpinning={handleSpinStop}
+          isRouletteMode={isRouletteMode}
+          onRouletteComplete={handleRouletteComplete}
           shouldStop={isManualStop}
           onStopComplete={handleStopComplete}
           resetTonearm={shouldResetTonearm}
           spinSpeed={spinSpeed}
           onSpeedToggle={handleSpeedToggle}
           onStopClick={handleStopClick}
-          onStartClick={handleSpinClick}
+          onStartClick={handleStartClick}
+          onWheelClick={handleWheelClick}
+          filterTransition={isWheelTransitioning}
           backgroundColors={[
             '#2C3E50', // Dark blue
             '#E74C3C', // Coral red
@@ -492,10 +644,8 @@ const DiscogsRoulette = () => {
           radiusLineColor="rgba(0,0,0,0.3)"
           radiusLineWidth={2}
           fontSize={11}
-          spinDuration={getSpinDuration()}
           textDistance={85}
           perpendicularText={false}
-          enableSound={true}
         />
       </div>
 
@@ -512,7 +662,7 @@ const DiscogsRoulette = () => {
         {selectedAlbum && (
           <div className="album-details">
             <h2>Your Next Vinyl</h2>
-            <p className="album-title">{selectedAlbum.option}</p>
+            <p className="album-title">{selectedAlbum.basic_information?.title || selectedAlbum.option}</p>
             {isLoadingDetails ? (
               <div className="loading-image">Loading album details...</div>
             ) : (
@@ -522,7 +672,7 @@ const DiscogsRoulette = () => {
                     <div className="vinyl-disc"></div>
                     <img
                       src={selectedAlbumDetails.images[0].resource_url}
-                      alt={selectedAlbum.option}
+                      alt={selectedAlbum.basic_information?.title}
                       className="album-image"
                     />
                   </div>

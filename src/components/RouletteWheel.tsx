@@ -9,7 +9,8 @@ interface RouletteWheelProps {
   mustStartSpinning: boolean;
   prizeNumber: number;
   data: WheelData[];
-  onStopSpinning?: () => void;
+  isRouletteMode?: boolean; // true = roulette spin (ends and selects), false = cosmetic (continuous)
+  onRouletteComplete?: () => void; // Callback when roulette spin completes
   backgroundColors?: string[];
   textColors?: string[];
   outerBorderColor?: string;
@@ -18,23 +19,25 @@ interface RouletteWheelProps {
   radiusLineColor?: string;
   radiusLineWidth?: number;
   fontSize?: number;
-  spinDuration?: number; // in seconds
   textDistance?: number;
   perpendicularText?: boolean;
-  shouldStop?: boolean; // When true, gradually stops the spin
-  onStopComplete?: () => void; // Callback when manual stop completes
+  shouldStop?: boolean; // When true, gradually stops the spin (cosmetic mode)
+  onStopComplete?: (stoppedIndex: number) => void; // Callback when manual stop completes with segment index
   resetTonearm?: boolean; // When true, animates tonearm back to rest position
   spinSpeed?: '33' | '45'; // Current speed setting
   onSpeedToggle?: () => void; // Callback when speed button clicked
   onStopClick?: () => void; // Callback when stop button clicked
   onStartClick?: () => void; // Callback when start button clicked
+  onWheelClick?: () => void; // Callback when wheel (not buttons) is clicked
+  filterTransition?: boolean; // When true, triggers a small spin animation
 }
 
 const RouletteWheel = ({
   mustStartSpinning,
   prizeNumber,
   data,
-  onStopSpinning,
+  isRouletteMode = false,
+  onRouletteComplete,
   shouldStop = false,
   onStopComplete,
   backgroundColors = ['darkgrey'],
@@ -45,7 +48,6 @@ const RouletteWheel = ({
   radiusLineColor = 'black',
   radiusLineWidth = 5,
   fontSize = 20,
-  spinDuration = 0.8,
   textDistance = 60,
   perpendicularText = false,
   resetTonearm = false,
@@ -53,20 +55,19 @@ const RouletteWheel = ({
   onSpeedToggle,
   onStopClick,
   onStartClick,
+  onWheelClick,
+  filterTransition = false,
 }: RouletteWheelProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
-  const [glowIntensity, setGlowIntensity] = useState(0);
   const [canvasSize, setCanvasSize] = useState(600);
-  const [confetti, setConfetti] = useState<Array<{x: number, y: number, vx: number, vy: number, color: string, size: number}>>([]);
   const [dpr, setDpr] = useState(1);
 
   // Animation state
   const isSpinning = useRef(false);
   const startRotation = useRef(0);
   const startTime = useRef(0);
-  const totalRotation = useRef(0);
 
   // Tonearm animation state
   const [tonearmAngle, setTonearmAngle] = useState<number | null>(null);
@@ -77,11 +78,9 @@ const RouletteWheel = ({
   // Stop animation state
   const isStoppingManually = useRef(false);
   const stopStartTime = useRef(0);
-  const stopStartRotation = useRef(0);
-  const stopTargetRotation = useRef(0);
+  const shouldStopRef = useRef(shouldStop);
 
   // Button state and positions
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [pressedButton, setPressedButton] = useState<string | null>(null);
   const buttonPositions = useRef<{
     speed: { x: number; y: number; radius: number };
@@ -118,43 +117,6 @@ const RouletteWheel = ({
     };
   }, []);
 
-  // Confetti animation
-  useEffect(() => {
-    if (confetti.length === 0) return;
-
-    const animateConfetti = () => {
-      setConfetti(prev => {
-        const updated = prev
-          .map(p => ({
-            ...p,
-            x: p.x + p.vx,
-            y: p.y + p.vy,
-            vy: p.vy + 0.3 * (canvasSize / 600), // gravity scaled to canvas size
-          }))
-          .filter(p => p.y < canvasSize + 100); // remove off-screen particles
-
-        return updated;
-      });
-    };
-
-    const interval = setInterval(animateConfetti, 16);
-    return () => clearInterval(interval);
-  }, [confetti.length, canvasSize]);
-
-  const spawnConfetti = useCallback(() => {
-    const colors = ['#ff8f43', '#f9dd50', '#4CAF50', '#2980B9', '#E74C3C', '#9B59B6'];
-    const scale = canvasSize / 600;
-    const particles = Array.from({ length: 50 }, () => ({
-      x: canvasSize / 2,
-      y: 50 * scale,
-      vx: (Math.random() - 0.5) * 15 * scale,
-      vy: (-Math.random() * 10 - 5) * scale,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      size: (Math.random() * 8 + 4) * scale,
-    }));
-    setConfetti(particles);
-  }, [canvasSize]);
-
   // Calculate tonearm rest and playing angles
   const getTonearmAngles = useCallback(() => {
     const scale = canvasSize / 600;
@@ -177,29 +139,6 @@ const RouletteWheel = ({
 
     return { playingAngle, restAngle, pivotX, pivotY };
   }, [canvasSize, outerBorderWidth]);
-
-  // Initiate gradual stop animation
-  const initiateGradualStop = useCallback((currentRotation: number, currentTime: number) => {
-    const needleAngle = Math.PI / 6; // 5 o'clock
-    const numSegments = data.length;
-    const arcSize = (2 * Math.PI) / numSegments;
-
-    // Find nearest segment to needle
-    const normalizedRot = currentRotation % (2 * Math.PI);
-    const relativeAngle = (needleAngle - normalizedRot + 2 * Math.PI) % (2 * Math.PI);
-    const nearestSegmentIndex = Math.round(relativeAngle / arcSize);
-    const nearestSegmentAngle = nearestSegmentIndex * arcSize;
-
-    // Calculate target
-    const rotationsToAdd = nearestSegmentAngle - relativeAngle;
-    const targetRotation = currentRotation + rotationsToAdd;
-
-    // Setup stop animation
-    stopStartRotation.current = currentRotation;
-    stopTargetRotation.current = targetRotation;
-    stopStartTime.current = currentTime;
-    isStoppingManually.current = true;
-  }, [data.length]);
 
   // Draw realistic 3D button
   const drawButton = useCallback((
@@ -306,6 +245,11 @@ const RouletteWheel = ({
     return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
   };
 
+  // Keep shouldStopRef in sync with prop
+  useEffect(() => {
+    shouldStopRef.current = shouldStop;
+  }, [shouldStop]);
+
   // Initialize tonearm to rest position
   useEffect(() => {
     if (tonearmAngle === null) {
@@ -343,18 +287,6 @@ const RouletteWheel = ({
 
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      // Draw glow effect when spinning
-      if (glowIntensity > 0) {
-        ctx.save();
-        ctx.shadowColor = '#f9dd50';
-        ctx.shadowBlur = 30 * glowIntensity * scale;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius + 5 * scale, 0, 2 * Math.PI);
-        ctx.fillStyle = 'transparent';
-        ctx.fill();
-        ctx.restore();
-      }
-
       // Draw vinyl record base (black vinyl)
       ctx.save();
       ctx.translate(centerX, centerY);
@@ -389,14 +321,24 @@ const RouletteWheel = ({
         const textureInnerRadius = labelRadius + texturePadding;
         const textureOuterRadius = radius - 15 * scale - texturePadding;
 
-        // Draw concentric circular grooves
+        // Draw concentric circular grooves with track gaps
         ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
         ctx.lineWidth = 0.8 * scale;
-        const grooveSpacing = 4 * scale;
-        for (let r = textureInnerRadius; r < textureOuterRadius; r += grooveSpacing) {
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, r, angle, angle + arcSize);
-          ctx.stroke();
+        const grooveSpacing = 3 * scale; // Tighter grooves within a track
+        const trackGap = 12 * scale; // Larger gap between tracks
+        const groovesPerTrack = 5; // Number of grooves per track section
+
+        let r = textureInnerRadius;
+        while (r < textureOuterRadius) {
+          // Draw a group of close grooves (one track)
+          for (let i = 0; i < groovesPerTrack && r < textureOuterRadius; i++) {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, r, angle, angle + arcSize);
+            ctx.stroke();
+            r += grooveSpacing;
+          }
+          // Add larger gap for track separation
+          r += trackGap;
         }
 
         // Add subtle radial lines for depth
@@ -490,21 +432,21 @@ const RouletteWheel = ({
       ctx.translate(centerX, centerY);
       ctx.rotate(rotation);
 
-      // White background with black border
+      // Black background with white border
       ctx.beginPath();
       ctx.arc(0, 0, labelRadius, 0, 2 * Math.PI);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#0a0a0a';
       ctx.fill();
-      ctx.strokeStyle = '#1a1a1a';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2 * scale;
       ctx.stroke();
 
       // Draw multiple Archimedean spirals for zoetrope effect
-      const numSpirals = 3;
+      const numSpirals = 2;
       const spiralTurns = 2.5;
       const angleOffset = (2 * Math.PI) / numSpirals;
 
-      ctx.strokeStyle = '#1a1a1a';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 3 * scale;
       ctx.lineCap = 'round';
 
@@ -701,19 +643,78 @@ const RouletteWheel = ({
         start: { x: startButtonX, y: buttonY, radius: buttonRadius }
       };
 
-      // Draw SPEED button (orange/copper)
+      // Draw SPEED button (black) - pressed when 45 RPM
       drawButton(
         ctx,
         speedButtonX,
         buttonY,
         buttonRadius,
         'SPEED',
-        '#CD7F32', // Copper color
-        pressedButton === 'speed',
+        '#3a3a3a', // Black like other buttons
+        spinSpeed === '45',
         isSpinning.current,
-        scale,
-        '33  45' // Top label
+        scale
       );
+
+      // Draw RPM labels and indicator lights above speed button
+      const labelY = buttonY - buttonRadius - 18 * scale;
+      const indicatorY = labelY + 10 * scale;
+      const labelSpacing = 14 * scale;
+      const indicatorWidth = 8 * scale;
+      const indicatorHeight = 4 * scale;
+      const alpha = isSpinning.current ? 0.4 : 1.0;
+
+      // "33" label
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#cccccc';
+      ctx.font = `bold ${10 * scale}px 'Arial', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('33', speedButtonX - labelSpacing, labelY);
+      ctx.restore();
+
+      // 33 indicator light below label (orange when active)
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.roundRect(speedButtonX - labelSpacing - indicatorWidth / 2, indicatorY, indicatorWidth, indicatorHeight, 2 * scale);
+      if (spinSpeed === '33') {
+        ctx.fillStyle = '#ff8f43';
+        ctx.shadowColor = '#ff8f43';
+        ctx.shadowBlur = 6 * scale;
+      } else {
+        ctx.fillStyle = '#333333';
+        ctx.shadowBlur = 0;
+      }
+      ctx.fill();
+      ctx.restore();
+
+      // "45" label
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#cccccc';
+      ctx.font = `bold ${10 * scale}px 'Arial', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('45', speedButtonX + labelSpacing, labelY);
+      ctx.restore();
+
+      // 45 indicator light below label (orange when active)
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.roundRect(speedButtonX + labelSpacing - indicatorWidth / 2, indicatorY, indicatorWidth, indicatorHeight, 2 * scale);
+      if (spinSpeed === '45') {
+        ctx.fillStyle = '#ff8f43';
+        ctx.shadowColor = '#ff8f43';
+        ctx.shadowBlur = 6 * scale;
+      } else {
+        ctx.fillStyle = '#333333';
+        ctx.shadowBlur = 0;
+      }
+      ctx.fill();
+      ctx.restore();
 
       // Draw STOP button (dark grey)
       drawButton(
@@ -757,15 +758,14 @@ const RouletteWheel = ({
     perpendicularText,
     innerBorderColor,
     rotation,
-    glowIntensity,
-    confetti,
     canvasSize,
     dpr,
     tonearmAngle,
     getTonearmAngles,
     pressedButton,
     drawButton,
-    mustStartSpinning
+    mustStartSpinning,
+    spinSpeed
   ]);
 
   // Helper function for color manipulation
@@ -790,143 +790,173 @@ const RouletteWheel = ({
     return `#${(0x1000000 + Math.round(R) * 0x10000 + Math.round(G) * 0x100 + Math.round(B)).toString(16).slice(1)}`;
   };
 
+  // Store current speed in a ref for the animation loop
+  const spinSpeedRef = useRef(spinSpeed);
+  useEffect(() => {
+    spinSpeedRef.current = spinSpeed;
+  }, [spinSpeed]);
+
+  // Store isRouletteMode in ref for animation access
+  const isRouletteModeRef = useRef(isRouletteMode);
+  useEffect(() => {
+    isRouletteModeRef.current = isRouletteMode;
+  }, [isRouletteMode]);
+
+  // Spinning animation - handles both roulette and cosmetic modes
   useEffect(() => {
     if (mustStartSpinning && !isSpinning.current && data.length > 0) {
       isSpinning.current = true;
       startTime.current = performance.now();
       startRotation.current = rotation;
+      tonearmDownTriggered.current = false;
 
-      // Set tonearm to rest position (disengaged) at start
-      const { restAngle } = getTonearmAngles();
-      setTonearmAngle(restAngle);
-      tonearmAnimating.current = false;
-      tonearmDownTriggered.current = false; // Reset flag for new spin
-
-      const numSegments = data.length;
-      const arcSize = (2 * Math.PI) / numSegments;
-
-      // Moderate spins (2 to 4 full rotations)
-      const extraSpins = (2 + Math.random() * 2) * 2 * Math.PI;
-
-      // Target angle for the center of the winning segment
-      // Needle points at 5 o'clock position (π/6 radians = 30 degrees below horizontal right)
-      const needleAngle = Math.PI / 6;
-      const winningSegmentAngle = prizeNumber * arcSize + arcSize / 2;
-
-      let targetRotation = needleAngle - winningSegmentAngle;
-
-      // Make target larger than current
-      while (targetRotation < startRotation.current + extraSpins) {
-        targetRotation += 2 * Math.PI;
+      // Calculate target rotation for roulette mode
+      let targetRotation = 0;
+      let spinDuration = 4; // seconds for roulette spin
+      if (isRouletteModeRef.current) {
+        const numSegments = data.length;
+        const arcSize = (2 * Math.PI) / numSegments;
+        const needleAngle = Math.PI / 6; // 5 o'clock
+        const winningSegmentAngle = prizeNumber * arcSize + arcSize / 2;
+        const extraSpins = (3 + Math.random() * 2) * 2 * Math.PI;
+        targetRotation = needleAngle - winningSegmentAngle;
+        while (targetRotation < startRotation.current + extraSpins) {
+          targetRotation += 2 * Math.PI;
+        }
+        spinDuration = 4 + Math.random() * 1;
       }
 
-      totalRotation.current = targetRotation;
+      // Animate tonearm down to playing position
+      if (!tonearmAnimating.current) {
+        tonearmAnimating.current = true;
+        tonearmStartTime.current = performance.now();
+        const angles = getTonearmAngles();
+        const startAngle = angles.restAngle;
+        const endAngle = angles.playingAngle;
 
-      // Calculate duration based on spin amount (longer spin = longer duration)
-      const actualDuration = spinDuration + 2 + Math.random() * 1;
+        const animateTonearmDown = (currentTime: number) => {
+          const downElapsed = (currentTime - tonearmStartTime.current) / 1000;
+          const downDuration = 1.5;
+
+          if (downElapsed < downDuration) {
+            const t = downElapsed / downDuration;
+            const easeOut = 1 - Math.pow(1 - t, 3);
+            setTonearmAngle(startAngle + (endAngle - startAngle) * easeOut);
+            requestAnimationFrame(animateTonearmDown);
+          } else {
+            setTonearmAngle(endAngle);
+            tonearmAnimating.current = false;
+          }
+        };
+        requestAnimationFrame(animateTonearmDown);
+      }
+
+      let lastTime = performance.now();
 
       const animate = (currentTime: number) => {
         if (!isSpinning.current) return;
 
         const elapsed = (currentTime - startTime.current) / 1000;
 
-        // Check for manual stop trigger
-        if (shouldStop && !isStoppingManually.current && elapsed < actualDuration) {
-          const t = elapsed / actualDuration;
-          const easeInOut = t < 0.5
-            ? 4 * t * t * t
-            : 1 - Math.pow(-2 * t + 2, 3) / 2;
-          const currentRot = startRotation.current + (totalRotation.current - startRotation.current) * easeInOut;
-
-          initiateGradualStop(currentRot, currentTime);
+        // ROULETTE MODE: Spin to target and stop
+        if (isRouletteModeRef.current) {
+          if (elapsed < spinDuration) {
+            const t = elapsed / spinDuration;
+            const easeInOut = t < 0.5
+              ? 4 * t * t * t
+              : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            const currentRot = startRotation.current + (targetRotation - startRotation.current) * easeInOut;
+            setRotation(currentRot);
+            requestAnimationFrame(animate);
+          } else {
+            setRotation(targetRotation);
+            isSpinning.current = false;
+            if (onRouletteComplete) onRouletteComplete();
+          }
+          return;
         }
 
-        // Handle manual stop animation
+        // COSMETIC MODE: Continuous spin until stop
+        // Check for stop trigger
+        if (shouldStopRef.current && !isStoppingManually.current) {
+          isStoppingManually.current = true;
+          stopStartTime.current = currentTime;
+        }
+
+        // Handle gradual stop
         if (isStoppingManually.current) {
           const stopElapsed = (currentTime - stopStartTime.current) / 1000;
           const stopDuration = 2.0;
 
           if (stopElapsed < stopDuration) {
             const t = stopElapsed / stopDuration;
-            const easeOut = 1 - Math.pow(1 - t, 3); // Cubic ease-out
-            const currentRot = stopStartRotation.current +
-              (stopTargetRotation.current - stopStartRotation.current) * easeOut;
-            setRotation(currentRot);
-            setGlowIntensity((1 - t) * 0.5);
+            const easeOut = 1 - Math.pow(1 - t, 2);
+            const currentSpeed = spinSpeedRef.current === '33' ? 33 : 45;
+            const rpm = currentSpeed * (1 - easeOut);
+            const rotationsPerSecond = rpm / 60;
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+            setRotation(prev => prev + rotationsPerSecond * 2 * Math.PI * deltaTime);
             requestAnimationFrame(animate);
           } else {
-            // Stop complete
-            setRotation(stopTargetRotation.current);
-            setGlowIntensity(0);
             isSpinning.current = false;
             isStoppingManually.current = false;
-            spawnConfetti();
 
-            if (onStopComplete) onStopComplete();
-            if (onStopSpinning) onStopSpinning();
+            // Calculate which segment is under the needle (5 o'clock position)
+            if (onStopComplete && data.length > 0) {
+              const needleAngle = Math.PI / 6; // 5 o'clock
+              const numSegments = data.length;
+              const arcSize = (2 * Math.PI) / numSegments;
+              // Get current rotation and normalize
+              const normalizedRot = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+              // Calculate which segment the needle points to
+              const relativeAngle = ((needleAngle - normalizedRot) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+              const stoppedIndex = Math.floor(relativeAngle / arcSize) % numSegments;
+              onStopComplete(stoppedIndex);
+            }
           }
           return;
         }
 
-        if (elapsed < actualDuration) {
-          // Ease-in-out: starts slow, speeds up in middle, slows down at end
-          const t = elapsed / actualDuration;
-          const easeInOut = t < 0.5
-            ? 4 * t * t * t
-            : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        // Continuous rotation at selected RPM
+        const currentSpeed = spinSpeedRef.current === '33' ? 33 : 45;
+        const rotationsPerSecond = currentSpeed / 60;
+        const deltaTime = (currentTime - lastTime) / 1000;
+        lastTime = currentTime;
 
-          const currentRot = startRotation.current + (totalRotation.current - startRotation.current) * easeInOut;
-          setRotation(currentRot);
-
-          // Update glow intensity (peaks in middle, fades at end)
-          const glowT = t < 0.5 ? t * 2 : 2 - t * 2;
-          setGlowIntensity(glowT * 0.8);
-
-          // Lower tonearm to playing position when wheel starts slowing down (60% complete)
-          if (t >= 0.6 && !tonearmDownTriggered.current) {
-            tonearmDownTriggered.current = true; // Mark as triggered
-            tonearmAnimating.current = true;
-            tonearmStartTime.current = performance.now();
-
-            // Capture angles once at the start of animation
-            const angles = getTonearmAngles();
-            const startAngle = angles.restAngle;
-            const endAngle = angles.playingAngle;
-
-            const animateTonearmDown = (currentTime: number) => {
-              const downElapsed = (currentTime - tonearmStartTime.current) / 1000;
-              const downDuration = 0.6; // 600ms to lower arm to record
-
-              if (downElapsed < downDuration) {
-                const downT = downElapsed / downDuration;
-                const easeOut = 1 - Math.pow(1 - downT, 3); // Cubic ease-out
-                const currentAngle = startAngle + (endAngle - startAngle) * easeOut;
-                setTonearmAngle(currentAngle);
-                requestAnimationFrame(animateTonearmDown);
-              } else {
-                setTonearmAngle(endAngle);
-                tonearmAnimating.current = false;
-              }
-            };
-            requestAnimationFrame(animateTonearmDown);
-          }
-
-          requestAnimationFrame(animate);
-        } else {
-          setRotation(totalRotation.current);
-          setGlowIntensity(0);
-          isSpinning.current = false;
-
-          // Spawn confetti
-          spawnConfetti();
-
-          if (onStopSpinning) onStopSpinning();
-        }
+        setRotation(prev => prev + rotationsPerSecond * 2 * Math.PI * deltaTime);
+        requestAnimationFrame(animate);
       };
 
       requestAnimationFrame(animate);
     }
-  }, [mustStartSpinning, prizeNumber, data.length, spinDuration, onStopSpinning, rotation, spawnConfetti, getTonearmAngles]);
+  }, [mustStartSpinning, prizeNumber, data.length, rotation, getTonearmAngles, onStopComplete, onRouletteComplete]);
+
+  // Animate a small spin when filter transition is triggered
+  useEffect(() => {
+    if (filterTransition && !isSpinning.current) {
+      const startRot = rotation;
+      // Random rotation between 30 and 120 degrees
+      const randomDegrees = 30 + Math.random() * 90;
+      const targetRot = rotation + (randomDegrees * Math.PI / 180);
+      const duration = 1500; // ms
+      const startTime = performance.now();
+
+      const animateFilterSpin = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        if (elapsed < duration) {
+          const t = elapsed / duration;
+          // Quick start, long gradual deceleration (cubic ease-out)
+          const easeOut = 1 - Math.pow(1 - t, 3);
+          setRotation(startRot + (targetRot - startRot) * easeOut);
+          requestAnimationFrame(animateFilterSpin);
+        } else {
+          setRotation(targetRot);
+        }
+      };
+      requestAnimationFrame(animateFilterSpin);
+    }
+  }, [filterTransition]);
 
   // Animate tonearm back to rest position when resetTonearm becomes true
   useEffect(() => {
@@ -1012,7 +1042,20 @@ const RouletteWheel = ({
       onStartClick();
       return;
     }
-  }, [buttonPositions, dpr, mustStartSpinning, onSpeedToggle, onStopClick, onStartClick]);
+
+    // Check if clicked on the wheel (vinyl) - not buttons
+    const centerX = canvasSize / 2;
+    const centerY = canvasSize / 2;
+    const scale = canvasSize / 600;
+    const scaledBorderWidth = outerBorderWidth * scale;
+    const radius = Math.min(centerX, centerY) - scaledBorderWidth - 10 * scale;
+    const distFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+    if (distFromCenter <= radius && !mustStartSpinning && onWheelClick) {
+      onWheelClick();
+      return;
+    }
+  }, [buttonPositions, dpr, mustStartSpinning, onSpeedToggle, onStopClick, onStartClick, onWheelClick, canvasSize, outerBorderWidth]);
 
   return (
     <div
