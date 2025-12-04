@@ -32,6 +32,10 @@ interface RouletteWheelProps {
   filterTransition?: boolean; // When true, triggers a small spin animation
 }
 
+// Extra canvas space for tonearm (as ratio of wheel size)
+const TONEARM_PADDING_RIGHT = 0.30; // 30% extra width on right
+const TONEARM_PADDING_TOP = 0.15;   // 15% extra height on top
+
 const RouletteWheel = ({
   mustStartSpinning,
   prizeNumber,
@@ -61,7 +65,8 @@ const RouletteWheel = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
-  const [canvasSize, setCanvasSize] = useState(600);
+  const rotationRef = useRef(0); // Track current rotation for accurate stop calculation
+  const [wheelSize, setWheelSize] = useState(400);
   const [dpr, setDpr] = useState(1);
 
   // Animation state
@@ -94,17 +99,17 @@ const RouletteWheel = ({
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
         const containerHeight = containerRef.current.offsetHeight;
-        // Use the smaller dimension to ensure the wheel fits
-        const size = Math.min(containerWidth, containerHeight) || 400;
-        setCanvasSize(size);
-        // Get device pixel ratio for sharp rendering on high-DPI displays
+        // Calculate max wheel size that fits within container (accounting for tonearm space)
+        const maxFromWidth = containerWidth / (1 + TONEARM_PADDING_RIGHT);
+        const maxFromHeight = containerHeight / (1 + TONEARM_PADDING_TOP);
+        const size = Math.min(maxFromWidth, maxFromHeight) || 400;
+        setWheelSize(size);
         setDpr(window.devicePixelRatio || 1);
       }
     };
 
     updateSize();
 
-    // Use ResizeObserver for more reliable size updates
     const resizeObserver = new ResizeObserver(updateSize);
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
@@ -119,26 +124,26 @@ const RouletteWheel = ({
 
   // Calculate tonearm rest and playing angles
   const getTonearmAngles = useCallback(() => {
-    const scale = canvasSize / 600;
-    const centerX = canvasSize / 2;
-    const centerY = canvasSize / 2;
+    const scale = wheelSize / 600;
+    const centerX = wheelSize / 2;
+    const centerY = wheelSize / 2;
     const scaledBorderWidth = outerBorderWidth * scale;
     const radius = Math.min(centerX, centerY) - scaledBorderWidth - 10 * scale;
 
-    // Pivot positioned to the right of the wheel (in the extra canvas space)
-    const pivotX = canvasSize + 40 * scale; // In the 30% extra space on the right
-    const pivotY = centerY - radius * 0.60; // Shifted up 10% more
+    // Pivot positioned to the right of the wheel (in the tonearm padding area)
+    const pivotX = wheelSize + 40 * scale;
+    const pivotY = centerY - radius * 0.60;
 
     // Target at 5 o'clock position (on the record edge)
-    const targetAngle = Math.PI / 6; // 5 o'clock = 30 degrees below horizontal
+    const targetAngle = Math.PI / 6;
     const targetX = centerX + Math.cos(targetAngle) * (radius - 20 * scale);
     const targetY = centerY + Math.sin(targetAngle) * (radius - 20 * scale);
 
     const playingAngle = Math.atan2(targetY - pivotY, targetX - pivotX);
-    const restAngle = Math.PI / 2; // Pointing straight down (90 degrees)
+    const restAngle = Math.PI / 2;
 
     return { playingAngle, restAngle, pivotX, pivotY };
-  }, [canvasSize, outerBorderWidth]);
+  }, [wheelSize, outerBorderWidth]);
 
   // Draw realistic 3D button
   const drawButton = useCallback((
@@ -256,7 +261,7 @@ const RouletteWheel = ({
       const { restAngle } = getTonearmAngles();
       setTonearmAngle(restAngle);
     }
-  }, [canvasSize, getTonearmAngles, tonearmAngle]);
+  }, [wheelSize, getTonearmAngles, tonearmAngle]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -265,21 +270,18 @@ const RouletteWheel = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Scale canvas for high-DPI displays
-    // Add extra space for tonearm (30% extra on right side, 15% on top)
-    const tonearmPaddingRight = canvasSize * 0.30;
-    const tonearmPaddingTop = canvasSize * 0.15;
-    const canvasWidth = canvasSize + tonearmPaddingRight;
-    const canvasHeight = canvasSize + tonearmPaddingTop;
+    // Canvas dimensions include tonearm space
+    const canvasWidth = wheelSize * (1 + TONEARM_PADDING_RIGHT);
+    const canvasHeight = wheelSize * (1 + TONEARM_PADDING_TOP);
     canvas.width = canvasWidth * dpr;
     canvas.height = canvasHeight * dpr;
     ctx.scale(dpr, dpr);
 
     const drawWheel = () => {
-      // Wheel is centered in the left portion, with offset for top padding
-      const centerX = canvasSize / 2;
-      const centerY = canvasSize / 2 + tonearmPaddingTop;
-      const scale = canvasSize / 600; // Scale factor for responsive sizing
+      // Wheel center: horizontally centered in wheel area, vertically offset for top padding
+      const centerX = wheelSize / 2;
+      const centerY = wheelSize / 2 + wheelSize * TONEARM_PADDING_TOP;
+      const scale = wheelSize / 600;
       const scaledBorderWidth = outerBorderWidth * scale;
       const radius = Math.min(centerX, centerY) - scaledBorderWidth - 10 * scale;
       const numSegments = data.length;
@@ -643,16 +645,16 @@ const RouletteWheel = ({
         start: { x: startButtonX, y: buttonY, radius: buttonRadius }
       };
 
-      // Draw SPEED button (black) - pressed when 45 RPM
+      // Draw SPEED button (black) - pressed when 45 RPM, always enabled
       drawButton(
         ctx,
         speedButtonX,
         buttonY,
         buttonRadius,
         'SPEED',
-        '#3a3a3a', // Black like other buttons
+        '#3a3a3a',
         spinSpeed === '45',
-        isSpinning.current,
+        false, // Speed can be changed while spinning
         scale
       );
 
@@ -662,11 +664,9 @@ const RouletteWheel = ({
       const labelSpacing = 14 * scale;
       const indicatorWidth = 8 * scale;
       const indicatorHeight = 4 * scale;
-      const alpha = isSpinning.current ? 0.4 : 1.0;
 
       // "33" label
       ctx.save();
-      ctx.globalAlpha = alpha;
       ctx.fillStyle = '#cccccc';
       ctx.font = `bold ${10 * scale}px 'Arial', sans-serif`;
       ctx.textAlign = 'center';
@@ -676,7 +676,6 @@ const RouletteWheel = ({
 
       // 33 indicator light below label (orange when active)
       ctx.save();
-      ctx.globalAlpha = alpha;
       ctx.beginPath();
       ctx.roundRect(speedButtonX - labelSpacing - indicatorWidth / 2, indicatorY, indicatorWidth, indicatorHeight, 2 * scale);
       if (spinSpeed === '33') {
@@ -692,7 +691,6 @@ const RouletteWheel = ({
 
       // "45" label
       ctx.save();
-      ctx.globalAlpha = alpha;
       ctx.fillStyle = '#cccccc';
       ctx.font = `bold ${10 * scale}px 'Arial', sans-serif`;
       ctx.textAlign = 'center';
@@ -702,7 +700,6 @@ const RouletteWheel = ({
 
       // 45 indicator light below label (orange when active)
       ctx.save();
-      ctx.globalAlpha = alpha;
       ctx.beginPath();
       ctx.roundRect(speedButtonX + labelSpacing - indicatorWidth / 2, indicatorY, indicatorWidth, indicatorHeight, 2 * scale);
       if (spinSpeed === '45') {
@@ -758,7 +755,7 @@ const RouletteWheel = ({
     perpendicularText,
     innerBorderColor,
     rotation,
-    canvasSize,
+    wheelSize,
     dpr,
     tonearmAngle,
     getTonearmAngles,
@@ -866,9 +863,11 @@ const RouletteWheel = ({
               ? 4 * t * t * t
               : 1 - Math.pow(-2 * t + 2, 3) / 2;
             const currentRot = startRotation.current + (targetRotation - startRotation.current) * easeInOut;
+            rotationRef.current = currentRot;
             setRotation(currentRot);
             requestAnimationFrame(animate);
           } else {
+            rotationRef.current = targetRotation;
             setRotation(targetRotation);
             isSpinning.current = false;
             if (onRouletteComplete) onRouletteComplete();
@@ -896,7 +895,11 @@ const RouletteWheel = ({
             const rotationsPerSecond = rpm / 60;
             const deltaTime = (currentTime - lastTime) / 1000;
             lastTime = currentTime;
-            setRotation(prev => prev + rotationsPerSecond * 2 * Math.PI * deltaTime);
+            setRotation(prev => {
+              const newRotation = prev + rotationsPerSecond * 2 * Math.PI * deltaTime;
+              rotationRef.current = newRotation;
+              return newRotation;
+            });
             requestAnimationFrame(animate);
           } else {
             isSpinning.current = false;
@@ -907,8 +910,8 @@ const RouletteWheel = ({
               const needleAngle = Math.PI / 6; // 5 o'clock
               const numSegments = data.length;
               const arcSize = (2 * Math.PI) / numSegments;
-              // Get current rotation and normalize
-              const normalizedRot = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+              // Get current rotation from ref (accurate final value) and normalize
+              const normalizedRot = ((rotationRef.current % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
               // Calculate which segment the needle points to
               const relativeAngle = ((needleAngle - normalizedRot) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
               const stoppedIndex = Math.floor(relativeAngle / arcSize) % numSegments;
@@ -924,7 +927,11 @@ const RouletteWheel = ({
         const deltaTime = (currentTime - lastTime) / 1000;
         lastTime = currentTime;
 
-        setRotation(prev => prev + rotationsPerSecond * 2 * Math.PI * deltaTime);
+        setRotation(prev => {
+          const newRotation = prev + rotationsPerSecond * 2 * Math.PI * deltaTime;
+          rotationRef.current = newRotation;
+          return newRotation;
+        });
         requestAnimationFrame(animate);
       };
 
@@ -935,10 +942,10 @@ const RouletteWheel = ({
   // Animate a small spin when filter transition is triggered
   useEffect(() => {
     if (filterTransition && !isSpinning.current) {
-      const startRot = rotation;
+      const startRot = rotationRef.current;
       // Random rotation between 30 and 120 degrees
       const randomDegrees = 30 + Math.random() * 90;
-      const targetRot = rotation + (randomDegrees * Math.PI / 180);
+      const targetRot = startRot + (randomDegrees * Math.PI / 180);
       const duration = 1500; // ms
       const startTime = performance.now();
 
@@ -948,9 +955,12 @@ const RouletteWheel = ({
           const t = elapsed / duration;
           // Quick start, long gradual deceleration (cubic ease-out)
           const easeOut = 1 - Math.pow(1 - t, 3);
-          setRotation(startRot + (targetRot - startRot) * easeOut);
+          const newRot = startRot + (targetRot - startRot) * easeOut;
+          rotationRef.current = newRot;
+          setRotation(newRot);
           requestAnimationFrame(animateFilterSpin);
         } else {
+          rotationRef.current = targetRot;
           setRotation(targetRot);
         }
       };
@@ -1016,9 +1026,9 @@ const RouletteWheel = ({
     // Check each button
     const { speed, stop, start } = buttonPositions.current;
 
-    // Check SPEED button
+    // Check SPEED button - can toggle speed even while spinning
     const distSpeed = Math.sqrt(Math.pow(x - speed.x, 2) + Math.pow(y - speed.y, 2));
-    if (distSpeed <= speed.radius && !mustStartSpinning && onSpeedToggle) {
+    if (distSpeed <= speed.radius && onSpeedToggle) {
       setPressedButton('speed');
       setTimeout(() => setPressedButton(null), 150);
       onSpeedToggle();
@@ -1044,18 +1054,18 @@ const RouletteWheel = ({
     }
 
     // Check if clicked on the wheel (vinyl) - not buttons
-    const centerX = canvasSize / 2;
-    const centerY = canvasSize / 2;
-    const scale = canvasSize / 600;
+    const centerX = wheelSize / 2;
+    const centerY = wheelSize / 2 + wheelSize * TONEARM_PADDING_TOP;
+    const scale = wheelSize / 600;
     const scaledBorderWidth = outerBorderWidth * scale;
-    const radius = Math.min(centerX, centerY) - scaledBorderWidth - 10 * scale;
+    const radius = Math.min(wheelSize / 2, wheelSize / 2) - scaledBorderWidth - 10 * scale;
     const distFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
 
     if (distFromCenter <= radius && !mustStartSpinning && onWheelClick) {
       onWheelClick();
       return;
     }
-  }, [buttonPositions, dpr, mustStartSpinning, onSpeedToggle, onStopClick, onStartClick, onWheelClick, canvasSize, outerBorderWidth]);
+  }, [buttonPositions, dpr, mustStartSpinning, onSpeedToggle, onStopClick, onStartClick, onWheelClick, wheelSize, outerBorderWidth]);
 
   return (
     <div
@@ -1073,11 +1083,11 @@ const RouletteWheel = ({
         onClick={handleCanvasClick}
         onTouchEnd={handleCanvasClick}
         style={{
-          width: `${canvasSize * 1.30}px`,
-          height: `${canvasSize * 1.15}px`,
+          width: wheelSize * (1 + TONEARM_PADDING_RIGHT),
+          height: wheelSize * (1 + TONEARM_PADDING_TOP),
           maxWidth: '100%',
           maxHeight: '100%',
-          touchAction: 'manipulation', // Prevent zoom on double-tap
+          touchAction: 'manipulation',
           cursor: 'pointer'
         }}
       />

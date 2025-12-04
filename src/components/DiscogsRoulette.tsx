@@ -35,12 +35,17 @@ const DiscogsRoulette = () => {
   const [isWheelTransitioning, setIsWheelTransitioning] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+  const [collectionSearchQuery, setCollectionSearchQuery] = useState('');
   const prevFilteredLength = useRef<number>(0);
 
-  // Detect screen size for responsive help display
+  // Detect screen size for responsive help display and filter state
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobileOrTablet(window.innerWidth <= 900);
+      const isMobile = window.innerWidth <= 900;
+      setIsMobileOrTablet(isMobile);
+      // Keep filter expanded on mobile/tablet since there's more vertical space
+      setIsFilterExpanded(isMobile);
     };
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -474,16 +479,23 @@ const DiscogsRoulette = () => {
     <div className="discogs-roulette-container">
       <div className="header">
         <h1>Vinyl Roulette</h1>
-        <div className="user-info-header">
-           <span>Collection: <strong>{username}</strong></span>
-           <button className="change-user-link" onClick={handleChangeUser}>(Change)</button>
-        </div>
-        <div className="collection-info">
-          {selectedGenres.length > 0 ? (
-            <span key={`filtered-${filteredData.length}`}>Spinning from {filteredData.length} of {data.length} albums</span>
-          ) : (
-            <span key="all">{data.length} albums in your collection</span>
-          )}
+        <div className="collection-header">
+          <button className="username-row" onClick={handleChangeUser}>
+            <span className="username">{username}</span>
+            <svg className="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+            </svg>
+          </button>
+          <button className="album-count-row" onClick={() => setIsCollectionModalOpen(true)}>
+            {selectedGenres.length > 0 ? (
+              <span key={`filtered-${filteredData.length}`}>{filteredData.length} of {data.length} albums</span>
+            ) : (
+              <span key="all">{data.length} albums</span>
+            )}
+            <svg className="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -680,7 +692,6 @@ const DiscogsRoulette = () => {
 
                 {selectedAlbumDetails?.genres && selectedAlbumDetails.genres.length > 0 && (
                   <div className="album-genres">
-                    <h3>Genre</h3>
                     <div className="genre-tags">
                       {selectedAlbumDetails.genres.map((genre, index) => (
                         <span key={index} className="genre-tag">{genre}</span>
@@ -692,28 +703,200 @@ const DiscogsRoulette = () => {
                   </div>
                 )}
 
-                {selectedAlbumDetails?.tracklist && selectedAlbumDetails.tracklist.length > 0 && (
-                  <div className="album-tracklist">
-                    <h3>Tracklist</h3>
-                    <ul className="track-list">
-                      {selectedAlbumDetails.tracklist.map((track, index) => (
-                        <li key={index} className="track-item">
-                          {track.position && (
-                            <span className="track-position">{track.position}</span>
-                          )}
-                          <span className="track-title">{track.title}</span>
-                          {track.duration && (
-                            <span className="track-duration">{track.duration}</span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {selectedAlbumDetails?.tracklist && selectedAlbumDetails.tracklist.length > 0 && (() => {
+                  // Split tracks by side (A/B/C/D etc.)
+                  const getSide = (position: string) => {
+                    if (!position) return '';
+                    const match = position.match(/^([A-Za-z]+)/);
+                    return match ? match[1].toUpperCase() : '';
+                  };
+
+                  const sides = [...new Set(selectedAlbumDetails.tracklist.map(t => getSide(t.position || '')).filter(Boolean))];
+                  const hasSides = sides.length >= 2;
+
+                  if (hasSides) {
+                    // Group tracks by side
+                    const tracksBySide: { [key: string]: typeof selectedAlbumDetails.tracklist } = {};
+                    selectedAlbumDetails.tracklist.forEach(track => {
+                      const side = getSide(track.position || '') || 'Other';
+                      if (!tracksBySide[side]) tracksBySide[side] = [];
+                      tracksBySide[side].push(track);
+                    });
+
+                    const sideKeys = Object.keys(tracksBySide).sort();
+                    const leftSides = sideKeys.filter((_, i) => i % 2 === 0);
+                    const rightSides = sideKeys.filter((_, i) => i % 2 === 1);
+
+                    return (
+                      <div className="album-tracklist">
+                        <h3>Tracklist</h3>
+                        <div className="track-list-sides">
+                          <div className="track-side">
+                            {leftSides.map(side => (
+                              <div key={side} className="side-group">
+                                <span className="side-label">Side {side}</span>
+                                <ul className="track-list-single">
+                                  {tracksBySide[side].map((track, index) => (
+                                    <li key={index} className="track-item">
+                                      {track.position && (
+                                        <span className="track-position">{track.position}</span>
+                                      )}
+                                      <span className="track-title">{track.title}</span>
+                                      {track.duration && (
+                                        <span className="track-duration">{track.duration}</span>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="track-side">
+                            {rightSides.map(side => (
+                              <div key={side} className="side-group">
+                                <span className="side-label">Side {side}</span>
+                                <ul className="track-list-single">
+                                  {tracksBySide[side].map((track, index) => (
+                                    <li key={index} className="track-item">
+                                      {track.position && (
+                                        <span className="track-position">{track.position}</span>
+                                      )}
+                                      <span className="track-title">{track.title}</span>
+                                      {track.duration && (
+                                        <span className="track-duration">{track.duration}</span>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  // No sides detected - use single column
+                  return (
+                    <div className="album-tracklist">
+                      <h3>Tracklist</h3>
+                      <ul className="track-list">
+                        {selectedAlbumDetails.tracklist.map((track, index) => (
+                          <li key={index} className="track-item">
+                            {track.position && (
+                              <span className="track-position">{track.position}</span>
+                            )}
+                            <span className="track-title">{track.title}</span>
+                            {track.duration && (
+                              <span className="track-duration">{track.duration}</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })()}
               </>
             )}
           </div>
         )}
+      </Modal>
+
+      {/* Collection Modal */}
+      <Modal isOpen={isCollectionModalOpen} onClose={() => {
+        setIsCollectionModalOpen(false);
+        setCollectionSearchQuery('');
+      }}>
+        <div className="collection-modal">
+          <h2>Your Collection</h2>
+          <div className="collection-search">
+            <input
+              type="text"
+              placeholder="Search albums or artists..."
+              value={collectionSearchQuery}
+              onChange={(e) => setCollectionSearchQuery(e.target.value)}
+              className="collection-search-input"
+              autoFocus
+            />
+            {collectionSearchQuery && (
+              <button
+                className="collection-search-clear"
+                onClick={() => setCollectionSearchQuery('')}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
+          </div>
+          <p className="collection-modal-subtitle">
+            {(() => {
+              const baseData = selectedGenres.length > 0 ? filteredData : data;
+              const searchFiltered = collectionSearchQuery
+                ? baseData.filter(album => {
+                    const query = collectionSearchQuery.toLowerCase();
+                    const title = (album.basic_information?.title || album.option || '').toLowerCase();
+                    const artist = (album.basic_information?.artists?.[0]?.name || '').toLowerCase();
+                    return title.includes(query) || artist.includes(query);
+                  })
+                : baseData;
+              return `${searchFiltered.length} of ${data.length} albums`;
+            })()}
+          </p>
+          <div className="collection-list">
+            {(() => {
+              const baseData = selectedGenres.length > 0 ? filteredData : data;
+              const searchFiltered = collectionSearchQuery
+                ? baseData.filter(album => {
+                    const query = collectionSearchQuery.toLowerCase();
+                    const title = (album.basic_information?.title || album.option || '').toLowerCase();
+                    const artist = (album.basic_information?.artists?.[0]?.name || '').toLowerCase();
+                    return title.includes(query) || artist.includes(query);
+                  })
+                : baseData;
+              return searchFiltered;
+            })().map((album, index) => (
+              <div
+                key={album.id || index}
+                className="collection-item"
+                onClick={() => {
+                  setSelectedAlbum(album);
+                  setIsCollectionModalOpen(false);
+                  setIsModalOpen(true);
+                  // Fetch album details
+                  if (album.id) {
+                    setIsLoadingDetails(true);
+                    fetchReleaseDetails(album.id)
+                      .then(details => {
+                        setSelectedAlbumDetails(details);
+                        setIsLoadingDetails(false);
+                      })
+                      .catch(() => {
+                        setIsLoadingDetails(false);
+                      });
+                  }
+                }}
+              >
+                {album.basic_information?.thumb && (
+                  <img
+                    src={album.basic_information.thumb}
+                    alt={album.basic_information?.title || album.option}
+                    className="collection-item-thumb"
+                  />
+                )}
+                <div className="collection-item-info">
+                  <span className="collection-item-title">
+                    {album.basic_information?.title || album.option}
+                  </span>
+                  {album.basic_information?.artists?.[0]?.name && (
+                    <span className="collection-item-artist">
+                      {album.basic_information.artists[0].name}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </Modal>
     </div>
   );

@@ -20,6 +20,7 @@ interface BasicInformation {
   artists: Array<{ name: string }>;
   year: number;
   cover_image?: string;
+  thumb?: string;
   genres?: string[];
   styles?: string[];
 }

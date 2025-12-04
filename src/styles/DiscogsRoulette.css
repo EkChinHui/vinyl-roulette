@@ -345,14 +345,13 @@ html, body {
   background:
     radial-gradient(ellipse at top right, rgba(249, 221, 80, 0.08) 0%, transparent 50%),
     linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-  padding: 2rem;
-  border-radius: 24px;
+  padding: 1.5rem;
+  border-radius: 20px;
   position: relative;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  width: 95%;
+  max-width: 580px;
+  max-height: 95vh;
+  overflow: hidden;
   opacity: 0;
   transform: scale(0.95) translateY(20px);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -401,33 +400,33 @@ html, body {
 
 .album-details h2 {
   color: #f9dd50;
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-shadow: 0 2px 10px rgba(249, 221, 80, 0.3);
 }
 
-.album-details p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+.album-details > p {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
   color: #ffffff;
 }
 
 .album-image-container {
   position: relative;
   display: inline-block;
-  margin: 1.5rem auto;
-  min-height: 280px;
-  padding: 0 70px;
+  margin: 0.5rem auto;
+  padding: 0 60px;
+  overflow: visible;
 }
 
 .album-image {
-  max-width: 280px;
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 8px;
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 15px 35px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.1);
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -441,8 +440,8 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 260px;
-  height: 260px;
+  width: 190px;
+  height: 190px;
   z-index: 1;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -622,17 +621,76 @@ html, body {
   }
 }
 
-/* Collection Info */
-.collection-info {
-  margin-top: 0.25rem;
-  font-size: 0.85rem;
-  color: #aaaaaa;
-  transition: opacity 0.3s ease;
+/* Collection Header */
+.collection-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.4rem;
 }
 
-.collection-info span {
-  display: inline-block;
+.username-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.username-row .username {
+  color: #f9dd50;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.username-row .edit-icon {
+  width: 11px;
+  height: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+.username-row:hover .username {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.username-row:hover .edit-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.album-count-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.album-count-row span {
   animation: infoFade 0.4s ease;
+}
+
+.album-count-row .chevron-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.album-count-row:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.album-count-row:hover .chevron-icon {
+  transform: translateX(3px);
 }
 
 @keyframes infoFade {
@@ -644,16 +702,6 @@ html, body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.user-info-header {
-  font-size: 0.9rem;
-  color: #cccccc;
-  margin-top: 0.25rem;
-}
-
-.user-info-header strong {
-  color: #f9dd50;
 }
 
 /* Genre Filter */
@@ -925,27 +973,21 @@ html, body {
 
 /* Genre and Style Tags */
 .album-genres {
-  margin: 1.5rem 0;
-  text-align: left;
-}
-
-.album-genres h3 {
-  color: #f9dd50;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
 }
 
 .genre-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
   justify-content: center;
 }
 
 .genre-tag, .style-tag {
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 14px;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: transform 0.2s ease;
 }
@@ -961,37 +1003,74 @@ html, body {
 }
 
 .genre-tag:hover, .style-tag:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 /* Tracklist */
 .album-tracklist {
-  margin: 1.5rem 0;
+  margin: 0.75rem 0 0;
   text-align: left;
 }
 
 .album-tracklist h3 {
   color: #f9dd50;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
+/* Two-column side layout (A/B sides) */
+.track-list-sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.track-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.side-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-label {
+  color: rgba(249, 221, 80, 0.7);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+.track-list-single {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Single column fallback (no sides) */
 .track-list {
   list-style: none;
-  counter-reset: track-counter;
   padding: 0;
-  max-height: 300px;
-  overflow-y: auto;
+  margin: 0;
+  column-count: 2;
+  column-gap: 0.75rem;
 }
 
 .track-item {
   display: flex;
   align-items: center;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 0.25rem;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 6px;
   transition: background 0.2s ease;
+  break-inside: avoid;
 }
 
 .track-item:hover {
@@ -1001,26 +1080,175 @@ html, body {
 .track-position {
   color: #f9dd50;
   font-weight: bold;
-  margin-right: 0.75rem;
-  min-width: 2rem;
-  font-size: 0.9rem;
+  margin-right: 0.4rem;
+  min-width: 1.25rem;
+  font-size: 0.75rem;
 }
 
 .track-title {
   flex: 1;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .track-duration {
   color: #aaaaaa;
-  font-size: 0.85rem;
-  margin-left: 1rem;
+  font-size: 0.7rem;
+  margin-left: 0.4rem;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .album-title {
   font-weight: 500;
+}
+
+/* Collection Modal */
+.collection-modal {
+  text-align: center;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-modal h2 {
+  color: #f9dd50;
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(249, 221, 80, 0.3);
+}
+
+.collection-search {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.collection-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.collection-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.collection-search-input:focus {
+  border-color: rgba(249, 221, 80, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.collection-search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.collection-search-clear:hover {
+  color: #ffffff;
+}
+
+.collection-modal-subtitle {
+  color: #aaaaaa;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.collection-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.collection-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.collection-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.collection-item-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.collection-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.collection-item-title {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collection-item-artist {
+  color: #aaaaaa;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Collection list scrollbar */
+.collection-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.collection-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.collection-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.collection-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Scrollbar styling for tracklist */
@@ -1042,11 +1270,14 @@ html, body {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Tablet breakpoint */
-@media (min-width: 481px) and (max-width: 900px) {
+/* Tablet breakpoint - includes iPad Pro */
+@media (min-width: 481px) and (max-width: 1199px) {
   .wheel-container {
-    max-width: 450px;
-    max-height: 450px;
+    left: 50%;
+    width: min(86vw, 83vh);
+    height: min(86vw, 83vh);
+    max-width: 780px;
+    max-height: 690px;
   }
 
   .header h1 {
@@ -1058,36 +1289,66 @@ html, body {
   }
 
   .modal-content {
-    max-width: 550px;
+    max-width: 650px;
   }
+}
 
-  .album-image {
-    max-width: 240px;
+/* Large tablets in portrait (iPad Pro) */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .wheel-container {
+    width: min(80vw, 90vh);
+    height: min(80vw, 90vh);
+    max-width: 800px;
+    max-height: 800px;
   }
 }
 
 @media (max-width: 768px) {
   .discogs-roulette-container {
-    padding: max(1vh, env(safe-area-inset-top))
-             max(0.5rem, env(safe-area-inset-right))
-             max(1vh, env(safe-area-inset-bottom))
-             max(0.5rem, env(safe-area-inset-left));
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: env(safe-area-inset-top, 0.5rem)
+             env(safe-area-inset-right, 0.5rem)
+             env(safe-area-inset-bottom, 0.5rem)
+             env(safe-area-inset-left, 0.5rem);
+    gap: 0;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+
+  .header {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    flex-shrink: 0;
+    text-align: left;
+    order: 1; /* Header first */
   }
 
   .header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .collection-info {
     font-size: 0.85rem;
   }
 
+  /* Genre filter - part of flex flow on mobile, at bottom */
   .genre-filter {
-    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
-    left: max(0.75rem, env(safe-area-inset-left));
-    right: max(0.75rem, env(safe-area-inset-right));
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
     max-width: none;
+    flex-shrink: 0;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+    order: 3; /* Filter at bottom */
   }
 
   .filter-toggle {
@@ -1106,16 +1367,35 @@ html, body {
   }
 
   .wheel-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     flex: 1 1 auto;
-    width: 100%;
-    max-width: 350px;
-    max-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 97vw;
+    height: auto;
+    max-width: none;
+    max-height: none;
     margin: 0 auto;
+    min-height: 0;
+    order: 2;
   }
 
   .control-panel {
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
     gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .help-button {
+    order: 1; /* Keep with header */
   }
 
   .start-button {
@@ -1135,22 +1415,28 @@ html, body {
 
   .modal-content {
     width: 95%;
-    padding: 1.5rem;
-    max-height: 85vh;
+    padding: 1rem;
+    max-height: 95vh;
   }
 
   .album-image {
-    max-width: 200px;
+    width: 160px;
+    height: 160px;
+  }
+
+  .vinyl-disc {
+    width: 150px;
+    height: 150px;
+  }
+
+  .album-image-container {
+    padding: 0 50px;
   }
 
   .spin-button {
     padding: 0.8rem 2rem;
     font-size: 1rem;
     margin: 1vh 0;
-  }
-
-  .track-list {
-    max-height: 150px;
   }
 
   .no-results-message {
@@ -1164,11 +1450,10 @@ html, body {
   }
 
   .album-details h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
-  .album-genres h3,
-  .album-tracklist h3 {
+  .album-details > p {
     font-size: 1rem;
   }
 }
@@ -1176,11 +1461,15 @@ html, body {
 /* Extra small devices */
 @media (max-width: 480px) {
   .discogs-roulette-container {
-    padding: 0.5vh;
+    padding: env(safe-area-inset-top, 0.25rem) 0.25rem env(safe-area-inset-bottom, 0.25rem) 0.25rem;
+  }
+
+  .header {
+    padding: 0.25rem 0.75rem;
   }
 
   .header h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .collection-info {
@@ -1188,15 +1477,16 @@ html, body {
   }
 
   .wheel-container {
-    flex: 1 1 auto;
-    width: 100%;
-    max-width: 280px;
-    max-height: 280px;
+    width: 96vw;
   }
 
   .genre-filter {
-    max-height: 100px;
+    max-height: 120px;
     overflow-y: auto;
+  }
+
+  .genre-filter.expanded .filter-content {
+    max-height: 100px;
   }
 
   .genre-filter-tags {
@@ -1215,19 +1505,44 @@ html, body {
   }
 
   .modal-content {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .album-image {
-    max-width: 150px;
+    width: 130px;
+    height: 130px;
   }
 
-  .track-item {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.85rem;
+  .vinyl-disc {
+    width: 120px;
+    height: 120px;
   }
 
-  .track-duration {
+  .album-image-container {
+    padding: 0 40px;
+    margin: 0.25rem auto;
+  }
+
+  .album-details h2 {
+    font-size: 1.2rem;
+  }
+
+  .album-details > p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .track-list {
+    column-count: 1;
+  }
+
+  .track-list-sides {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .genre-tag, .style-tag {
+    padding: 0.25rem 0.6rem;
     font-size: 0.75rem;
   }
 }
@@ -1280,9 +1595,10 @@ html, body {
 
   .wheel-container {
     flex: 1 1 auto;
-    width: 100%;
-    max-width: 250px;
-    max-height: 250px;
+    width: min(50vw, 80vh);
+    height: min(50vw, 80vh);
+    max-width: 350px;
+    max-height: 350px;
     order: 2;
   }
 
@@ -1616,27 +1932,58 @@ html, body {
   position: absolute;
   top: max(1rem, env(safe-area-inset-top));
   right: max(1.5rem, env(safe-area-inset-right));
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
-  font-weight: 600;
+  border: none;
+  background: linear-gradient(135deg, rgba(249, 221, 80, 0.15) 0%, rgba(255, 143, 67, 0.15) 100%);
+  color: rgba(249, 221, 80, 0.8);
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: Georgia, serif;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.help-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(249, 221, 80, 0.3), rgba(255, 143, 67, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .help-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #ffffff;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, rgba(249, 221, 80, 0.25) 0%, rgba(255, 143, 67, 0.25) 100%);
+  color: #f9dd50;
+  transform: scale(1.1);
+  box-shadow:
+    0 4px 16px rgba(249, 221, 80, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.help-button:hover::before {
+  opacity: 1;
+}
+
+.help-button:active {
+  transform: scale(0.95);
 }
 
 /* Help Overlay - Annotation Style */
@@ -1813,9 +2160,9 @@ html, body {
   .help-button {
     top: 0.75rem;
     right: 0.75rem;
-    width: 28px;
-    height: 28px;
-    font-size: 0.9rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
   }
 
   .annotation-content {
@@ -1955,104 +2302,101 @@ html, body {
 /* Short screen modal improvements */
 @media (max-height: 600px) {
   .modal-content {
-    max-height: 90vh;
-    padding: 1rem;
-  }
-
-  .album-image-container {
-    padding: 0 30px;
-    min-height: 150px;
+    max-height: 95vh;
+    padding: 0.75rem;
   }
 
   .album-image {
-    max-width: 130px;
+    width: 140px;
+    height: 140px;
   }
 
   .vinyl-disc {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
   }
 
-  .track-list {
-    max-height: 100px;
+  .album-image-container {
+    margin: 0.25rem auto;
   }
 
   .album-details h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
   }
 
-  .album-details p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .album-genres,
-  .album-tracklist {
-    margin: 1rem 0;
-  }
-
-  .album-genres h3,
-  .album-tracklist h3 {
-    font-size: 1rem;
+  .album-details > p {
+    font-size: 0.95rem;
     margin-bottom: 0.5rem;
+  }
+
+  .album-genres {
+    margin: 0.25rem 0;
+  }
+
+  .album-tracklist {
+    margin-top: 0.5rem;
   }
 }
 
 /* Very short screens (landscape phones) */
 @media (max-height: 450px) {
   .modal-content {
-    flex-direction: row;
-    flex-wrap: wrap;
     max-width: 95%;
-    padding: 0.75rem;
-    gap: 0.5rem;
-  }
-
-  .modal-close {
-    position: fixed;
-    top: 0.5rem;
-    right: 0.5rem;
-  }
-
-  .album-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    text-align: left;
-  }
-
-  .album-details h2,
-  .album-details > p {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0.25rem;
-  }
-
-  .album-image-container {
-    flex: 0 0 auto;
-    padding: 0;
-    min-height: auto;
-    margin: 0;
+    padding: 0.5rem;
   }
 
   .album-image {
-    max-width: 100px;
+    width: 100px;
+    height: 100px;
   }
 
   .vinyl-disc {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
   }
 
-  .album-genres,
-  .album-tracklist {
-    flex: 1;
-    margin: 0;
-    min-width: 150px;
+  .album-image-container {
+    padding: 0 30px;
+    margin: 0.25rem auto;
   }
 
-  .track-list {
-    max-height: 80px;
+  .album-details h2 {
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .album-details > p {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .album-genres {
+    margin: 0.25rem 0;
+  }
+
+  .genre-tag, .style-tag {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .album-tracklist h3 {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .track-item {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .track-title {
+    font-size: 0.75rem;
+  }
+
+  .track-position {
+    font-size: 0.7rem;
+  }
+
+  .track-duration {
+    font-size: 0.65rem;
   }
 }
