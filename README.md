@@ -4,6 +4,8 @@ A fun web application that helps you decide which vinyl record to play from your
 
 ![Vinyl Roulette Screenshot](screenshot.png)
 
+![Vinyl Roulette Demo](demo.gif)
+
 ## Features
 
 - 🎲 Interactive spinning wheel with your vinyl collection
