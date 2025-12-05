@@ -2,7 +2,11 @@
 
 A fun web application that helps you decide which vinyl record to play from your Discogs collection. The app creates an interactive spinning wheel populated with albums from your collection and randomly selects one to play.
 
-![Vinyl Roulette Demo](./demo.gif)
+
+
+https://github.com/user-attachments/assets/c341c3e7-4e83-42e2-b21f-c7c8d466a6db
+
+
 
 ## Features
 
