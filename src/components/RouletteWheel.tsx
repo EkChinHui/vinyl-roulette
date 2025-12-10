@@ -108,7 +108,10 @@ const RouletteWheel = ({
       }
     };
 
-    updateSize();
+    // Defer initial measurement to avoid forcing layout before page is fully loaded
+    requestAnimationFrame(() => {
+      updateSize();
+    });
 
     const resizeObserver = new ResizeObserver(updateSize);
     if (containerRef.current) {

@@ -13,7 +13,22 @@ const truncateText = (text: string, maxLength: number = 20): string => {
   return text.substring(0, maxLength - 3) + '...';
 };
 
+// Helper to get username from URL or localStorage (called before component renders)
+const getInitialUsername = (): string => {
+  const basePath = import.meta.env.BASE_URL || '/';
+  const path = window.location.pathname;
+  const pathWithoutBase = path.replace(basePath, '').replace(/^\/+/, '');
+  const urlUsername = pathWithoutBase.split('/').filter(Boolean)[0] || '';
+  if (urlUsername) {
+    localStorage.setItem('discogs_username', urlUsername);
+    return urlUsername;
+  }
+  return localStorage.getItem('discogs_username') || '';
+};
+
 const DiscogsRoulette = () => {
+  const initialUsername = getInitialUsername();
+
   const [mustSpin, setMustSpin] = useState(false);
   const [isRouletteMode, setIsRouletteMode] = useState(false); // true = roulette spin, false = cosmetic spin
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -22,7 +37,7 @@ const DiscogsRoulette = () => {
   const [selectedAlbum, setSelectedAlbum] = useState<RouletteData | null>(null);
   const [selectedAlbumDetails, setSelectedAlbumDetails] = useState<ReleaseDetails | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(!!initialUsername);
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [availableGenres, setAvailableGenres] = useState<string[]>([]);
@@ -55,27 +70,10 @@ const DiscogsRoulette = () => {
   // Get the base path from Vite config (handles GitHub Pages deployment)
   const basePath = import.meta.env.BASE_URL || '/';
 
-  // Get username from URL path (e.g., /vinyl-roulette/username) or localStorage
-  const getUsernameFromUrl = (): string => {
-    const path = window.location.pathname;
-    // Remove base path and get the remaining segment
-    const pathWithoutBase = path.replace(basePath, '').replace(/^\/+/, '');
-    const pathSegment = pathWithoutBase.split('/').filter(Boolean)[0];
-    return pathSegment || '';
-  };
-
-  // Username state
-  const [username, setUsername] = useState<string>(() => {
-    const urlUsername = getUsernameFromUrl();
-    if (urlUsername) {
-      // Store URL username in localStorage for future visits
-      localStorage.setItem('discogs_username', urlUsername);
-      return urlUsername;
-    }
-    return localStorage.getItem('discogs_username') || '';
-  });
-  const [isConfigured, setIsConfigured] = useState<boolean>(!!username);
-  const [inputUsername, setInputUsername] = useState(username);
+  // Username state (initialUsername computed at component top to initialize loading state)
+  const [username, setUsername] = useState<string>(initialUsername);
+  const [isConfigured, setIsConfigured] = useState<boolean>(!!initialUsername);
+  const [inputUsername, setInputUsername] = useState(initialUsername);
 
   // Update URL when username changes
   const updateUrl = (newUsername: string) => {
@@ -85,6 +83,13 @@ const DiscogsRoulette = () => {
     window.history.pushState({}, '', newPath);
   };
 
+  // Helper to get username from URL path
+  const getUsernameFromUrl = (): string => {
+    const path = window.location.pathname;
+    const pathWithoutBase = path.replace(basePath, '').replace(/^\/+/, '');
+    return pathWithoutBase.split('/').filter(Boolean)[0] || '';
+  };
+
   // Handle browser back/forward navigation
   useEffect(() => {
     const handlePopState = () => {
@@ -92,6 +97,7 @@ const DiscogsRoulette = () => {
       if (urlUsername && urlUsername !== username) {
         setUsername(urlUsername);
         setIsConfigured(true);
+        setLoading(true); // Start loading immediately to avoid flash
         localStorage.setItem('discogs_username', urlUsername);
       } else if (!urlUsername) {
         setIsConfigured(false);
@@ -304,6 +310,7 @@ const DiscogsRoulette = () => {
       localStorage.setItem('discogs_username', newUsername);
       setUsername(newUsername);
       setIsConfigured(true);
+      setLoading(true); // Start loading immediately to avoid flash of "no albums" message
       setError(null); // Clear any previous errors
       updateUrl(newUsername);
     }
