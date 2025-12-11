@@ -374,25 +374,34 @@ html, body {
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
-  color: #ffffff;
-  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
   cursor: pointer;
   padding: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .modal-close:hover {
-  transform: scale(1.1);
-  color: #ff8f43;
+  transform: scale(1.05);
+  color: #ffffff;
+  background: rgba(255, 143, 67, 0.3);
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+  background: rgba(255, 143, 67, 0.5);
 }
 
 .album-details {
@@ -500,19 +509,60 @@ html, body {
 .loading-text {
   font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.8);
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: loadingTextPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingTextPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
 }
 
 .loading-spinner {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  position: relative;
   background:
-    radial-gradient(circle at 50% 50%, #1a1a1a 0%, #1a1a1a 30%, transparent 30.5%),
-    repeating-radial-gradient(circle at 50% 50%, transparent 35%, rgba(255, 255, 255, 0.05) 36%, transparent 37%),
-    conic-gradient(from 0deg, #ff8f43, #f9dd50, #4CAF50, #2980B9, #ff8f43);
-  animation: spin 2s linear infinite;
-  box-shadow: 0 0 30px rgba(249, 221, 80, 0.3);
+    radial-gradient(circle at 50% 50%, #1a1a1a 0%, #1a1a1a 15%, transparent 15.5%),
+    radial-gradient(circle at 50% 50%, #333 15.5%, #333 16.5%, transparent 17%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.15) 20.5%, transparent 21%),
+    radial-gradient(circle at 35% 35%, #444 0%, #222 100%);
+  animation: vinylSpin 1.8s linear infinite;
+  box-shadow:
+    0 0 40px rgba(249, 221, 80, 0.2),
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f9dd50, #ff8f43);
+  box-shadow: 0 0 10px rgba(249, 221, 80, 0.5);
+}
+
+.loading-spinner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a1a1a;
 }
 
 @keyframes spin {
@@ -1025,12 +1075,16 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .track-side {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  min-width: 0; /* Allow proper text truncation */
+  overflow: hidden;
 }
 
 .side-group {
@@ -1072,6 +1126,7 @@ html, body {
   border-radius: 6px;
   transition: background 0.2s ease;
   break-inside: avoid;
+  min-width: 0; /* Allow flex children to shrink properly */
 }
 
 .track-item:hover {
@@ -1193,11 +1248,18 @@ html, body {
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
+  border: 1px solid transparent;
 }
 
 .collection-item:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateX(4px);
+  border-color: rgba(249, 221, 80, 0.3);
+}
+
+.collection-item:active {
+  transform: translateX(2px) scale(0.99);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .collection-item-thumb {
@@ -1338,6 +1400,13 @@ html, body {
     font-size: 0.85rem;
   }
 
+  /* Increase header button touch targets */
+  .username-row,
+  .album-count-row {
+    min-height: 44px;
+    padding: 0.5rem 0;
+  }
+
   /* Genre filter - part of flex flow on mobile, at bottom */
   .genre-filter {
     position: relative;
@@ -1353,8 +1422,9 @@ html, body {
   }
 
   .filter-toggle {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    min-height: 44px;
   }
 
   .filter-content {
@@ -1362,9 +1432,9 @@ html, body {
   }
 
   .genre-filter-tag {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
-    min-height: 28px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    min-height: 44px;
   }
 
   .wheel-container {
@@ -1482,7 +1552,7 @@ html, body {
   }
 
   .genre-filter {
-    max-height: 120px;
+    max-height: 140px;
     overflow-y: auto;
   }
 
@@ -1491,13 +1561,15 @@ html, body {
   }
 
   .genre-filter-tags {
-    max-height: 60px;
+    max-height: 80px;
     overflow-y: auto;
   }
 
+  /* Keep touch targets accessible even on small screens */
   .genre-filter-tag {
-    padding: 0.25rem 0.5rem;
+    padding: 0.4rem 0.6rem;
     font-size: 0.75rem;
+    min-height: 36px; /* Slightly smaller but still accessible */
   }
 
   .spin-button {
@@ -1933,27 +2005,27 @@ html, body {
   position: absolute;
   top: max(1rem, env(safe-area-inset-top));
   right: max(1.5rem, env(safe-area-inset-right));
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   aspect-ratio: 1;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, rgba(249, 221, 80, 0.15) 0%, rgba(255, 143, 67, 0.15) 100%);
-  color: rgba(249, 221, 80, 0.8);
-  font-size: 1.1rem;
+  background: linear-gradient(135deg, rgba(249, 221, 80, 0.2) 0%, rgba(255, 143, 67, 0.2) 100%);
+  color: rgba(249, 221, 80, 0.9);
+  font-size: 1.25rem;
   font-weight: 700;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
+  z-index: 100; /* Increased z-index to ensure clickability */
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 2px 12px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-tap-highlight-color: transparent;
   line-height: 1;
@@ -2161,9 +2233,11 @@ html, body {
   .help-button {
     top: 0.75rem;
     right: 0.75rem;
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.2rem;
   }
 
   .annotation-content {
